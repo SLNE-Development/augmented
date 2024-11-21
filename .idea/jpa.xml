@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig">
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="reLastEntityCreationPackage" value="augmented-shop/augmented-shop-api/src/main/kotlin/dev/slne/augmented/shop/api" />
+    <option name="renamerInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="643be9aa-035c-4856-a3a7-4684f3bed776" />
+  </component>
+</project>

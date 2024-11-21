@@ -1,0 +1,61 @@
+[versions]
+kotlin-jvm = "2.0.21"
+shadow-jar = "8.3.5"
+fastutil = "8.5.15"
+plugin-yml = "0.6.0"
+run-paper = "2.3.1"
+run-velocity = "2.3.1"
+commandapi-bukkit = "9.6.0"
+commandapi-bukkit-kotlin = "9.6.0"
+commandapi-velocity = "9.6.0-SNAPSHOT"
+commandapi-velocity-kotlin = "9.6.0-SNAPSHOT"
+spigot-api = "1.21.1-R0.1-SNAPSHOT"
+paperweight = "1.7.4"
+velocity-api = "3.4.0-SNAPSHOT"
+coroutines = "1.9.0"
+mccoroutine-velocity = "2.20.0"
+mccoroutine-bukkit = "2.20.0"
+hibernate = "6.6.2.Final"
+hibernate-hikari = "6.6.2.Final"
+jakarta-transactions = "2.0.1"
+adventure-api = "4.17.0"
+adventure-gson = "4.17.0"
+adventure-logger = "4.17.0"
+adventure-platform-bukkit = "4.3.4"
+configurate-hocon = "4.0.0"
+configurate-kotlin = "4.0.0"
+mariadb = "3.5.0"
+caffeine = "3.1.8"
+caffeine-coroutines = "1.2.0"
+
+[libraries]
+kotlin-jvm = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-jvm" }
+shadow-jar = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadow-jar" }
+fastutil = { module = "it.unimi.dsi:fastutil", version.ref = "fastutil" }
+plugin-yml = { module = "net.minecrell:plugin-yml", version.ref = "plugin-yml" }
+run-paper = { module = "xyz.jpenilla:run-task", version.ref = "run-paper" }
+run-velocity = { module = "xyz.jpenilla:run-task", version.ref = "run-velocity" }
+commandapi-bukkit = { module = "dev.jorel:commandapi-bukkit-core", version.ref = "commandapi-bukkit" }
+commandapi-bukkit-kotlin = { module = "dev.jorel:commandapi-bukkit-kotlin", version.ref = "commandapi-bukkit-kotlin" }
+commandapi-velocity = { module = "dev.jorel:commandapi-velocity-shade", version.ref = "commandapi-velocity" }
+commandapi-velocity-kotlin = { module = "dev.jorel:commandapi-velocity-kotlin", version.ref = "commandapi-velocity-kotlin" }
+spigot-api = { module = "org.spigotmc:spigot-api", version.ref = "spigot-api" }
+paperweight = { module = "io.papermc.paperweight:paperweight-userdev", version.ref = "paperweight" }
+velocity-api = { module = "com.velocitypowered:velocity-api", version.ref = "velocity-api" }
+coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+mccoroutine-velocity = { module = "com.github.shynixn.mccoroutine:mccoroutine-velocity-api", version.ref = "mccoroutine-velocity" }
+mccoroutine-velocity-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-velocity-core", version.ref = "mccoroutine-velocity" }
+mccoroutine-bukkit = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-api", version.ref = "mccoroutine-bukkit" }
+mccoroutine-bukkit-core = { module = "com.github.shynixn.mccoroutine:mccoroutine-bukkit-core", version.ref = "mccoroutine-bukkit" }
+hibernate = { module = "org.hibernate:hibernate-core", version.ref = "hibernate" }
+hibernate-hikari = { module = "org.hibernate:hibernate-hikaricp", version.ref = "hibernate-hikari" }
+jakarta-transactions = { module = "jakarta.transaction:jakarta.transaction-api", version.ref = "jakarta-transactions" }
+adventure-api = { module = "net.kyori:adventure-api", version.ref = "adventure-api" }
+adventure-gson = { module = "net.kyori:adventure-text-serializer-gson", version.ref = "adventure-gson" }
+adventure-logger = { module = "net.kyori:adventure-text-logger-slf4j", version.ref = "adventure-logger" }
+adventure-platform-bukkit = { module = "net.kyori:adventure-platform-bukkit", version.ref = "adventure-platform-bukkit" }
+configurate-hocon = { module = "org.spongepowered:configurate-hocon", version.ref = "configurate-hocon" }
+configurate-kotlin = { module = "org.spongepowered:configurate-extra-kotlin", version.ref = "configurate-kotlin" }
+mariadb = { module = "org.mariadb.jdbc:mariadb-java-client", version.ref = "mariadb" }
+caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
+caffeine-coroutines = { module = "dev.hsbrysk:caffeine-coroutines", version.ref = "caffeine-coroutines" }
