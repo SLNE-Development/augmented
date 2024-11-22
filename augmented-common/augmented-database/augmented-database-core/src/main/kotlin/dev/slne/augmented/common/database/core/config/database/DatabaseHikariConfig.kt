@@ -24,7 +24,7 @@ data class DatabaseHikariConfig(
     val maxLifetime: Long,
 
     @Comment("The fully qualified name of the JDBC driver class. Leave this as is if you are using MariaDB.")
-    val dataSourceClassName: String,
+    val driverClassName: String,
 ) {
     companion object {
         fun default() = DatabaseHikariConfig(
@@ -33,11 +33,11 @@ data class DatabaseHikariConfig(
             idleTimeout = 60000,
             connectionTimeout = 30000,
             maxLifetime = 1800000,
-            dataSourceClassName = "org.mariadb.jdbc.MariaDbDataSource"
+            driverClassName = "org.mariadb.jdbc.Driver"
         )
     }
 
     override fun toString(): String {
-        return "DatabaseHikariConfig(minimumIdle=$minimumIdle, maximumPoolSize=$maximumPoolSize, idleTimeout=$idleTimeout, connectionTimeout=$connectionTimeout, maxLifetime=$maxLifetime, dataSourceClassName='$dataSourceClassName')"
+        return "DatabaseHikariConfig(minimumIdle=$minimumIdle, maximumPoolSize=$maximumPoolSize, idleTimeout=$idleTimeout, connectionTimeout=$connectionTimeout, maxLifetime=$maxLifetime, dataSourceClassName='$driverClassName')"
     }
 }
