@@ -1,21 +1,31 @@
 package dev.slne.augmented.shop.api
 
-import jakarta.persistence.*
+import java.util.*
 
-@Entity
-@Table(name = "shops")
-open class Shop {
+interface Shop {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    var id: Long?
 
-    @Column(name = "material")
-    open var material: String? = null
+    var shopKey: UUID?
+    var shopOwner: UUID?
+    var material: String?
 
-    override fun toString(): String {
-        return "Shop(id=$id, material=$material)"
-    }
-    
+    var permittedUsers: Set<UUID>?
+
+    var server: String?
+    var world: String?
+    var x: Double?
+    var y: Double?
+    var z: Double?
+
+    var sellPrice: Double?
+    var buyPrice: Double?
+
+    var buyLimit: Int?
+    var sellLimit: Int?
+
+    var sellPaused: Boolean?
+    var buyPaused: Boolean?
+
+    var stockAmount: Int?
 }

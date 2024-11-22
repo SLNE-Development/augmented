@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-source-infos>
+      <data-source-info id="ee37ba71-95a4-4a39-a97e-45713e24f9d6__s23_augmented_shops" persistence-unit-name="augmented.augmented-shop.augmented-shop-core.main:augmented.augmented-shop.augmented-shop-core.main" />
+    </data-source-infos>
+  </component>
+</project>

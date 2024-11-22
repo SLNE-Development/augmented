@@ -46,7 +46,7 @@ object AugmentedPersistence {
         val maxLifetime = hikari.maxLifetime
         val idleTimeout = hikari.idleTimeout
         val connectionTimeout = hikari.connectionTimeout
-        val dataSourceClassName = hikari.dataSourceClassName
+        val dataSourceClassName = hikari.driverClassName
 
         val configuration = Configuration()
         configuration.setProperty("hibernate.connection.driver_class", dataSourceClassName)

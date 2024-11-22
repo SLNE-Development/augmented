@@ -5,14 +5,14 @@ import dev.slne.augmented.common.database.core.persistence.AugmentedPersistence
 import dev.slne.augmented.common.database.core.persistence.findAll
 import dev.slne.augmented.common.database.core.persistence.sessionFactory
 import dev.slne.augmented.common.database.core.persistence.withSession
-import dev.slne.augmented.shop.api.Shop
+import dev.slne.augmented.shop.core.CoreShop
 
 class AugmentedShopPlugin : AugmentedDatabasePlugin() {
 
     override suspend fun onLoadAsync() {
         super.onLoadAsync()
 
-        AugmentedPersistence.addAnnotatedClass(Shop::class)
+        AugmentedPersistence.addAnnotatedClass(CoreShop::class)
 
         val shops = fetchShops()
         println(shops)
@@ -26,7 +26,7 @@ class AugmentedShopPlugin : AugmentedDatabasePlugin() {
         super.onDisableAsync()
     }
 
-    private suspend fun fetchShops(): List<Shop> = sessionFactory.withSession {
-        it.findAll<Shop>()
+    private suspend fun fetchShops(): List<CoreShop> = sessionFactory.withSession {
+        it.findAll<CoreShop>()
     }
 }
