@@ -22,6 +22,9 @@ fun <T> ObjectSet<T>.synchronize(): ObjectSet<T> = ObjectSets.synchronize(this)
 fun <T> ObjectSet<T>.freeze(): @UnmodifiableView ObjectSet<T> = ObjectSets.unmodifiable(this)
 fun <T> Sequence<T>.toMutableObjectSet() = ObjectOpenHashSet(toList())
 fun <T> Sequence<T>.toObjectSet() = toMutableObjectSet().freeze()
+fun <T> Collection<T>.toObjectSet() = this as? ObjectSet<T> ?: ObjectOpenHashSet<T>(this).freeze()
+fun <T> Iterable<T>.toObjectSet() =
+    this as? ObjectSet<T> ?: ObjectOpenHashSet<T>(iterator()).freeze()
 
 // endregion
 // region ObjectList
@@ -40,6 +43,8 @@ fun <T> Sequence<T>.toObjectList() = toMutableObjectList().freeze()
 fun <T> Collection<T>.toObjectList() = this as? ObjectList<T> ?: ObjectArrayList<T>(this).freeze()
 fun <T> Iterable<T>.toObjectList() =
     this as? ObjectList<T> ?: ObjectArrayList<T>(iterator()).freeze()
+
+fun <T> Collection<T>.toObjectArrayList() = this as? ObjectArrayList<T> ?: ObjectArrayList(this)
 // endregion
 
 // region ObjectMap
