@@ -8,6 +8,7 @@ plugins {
 dependencies {
     api(project(":augmented-shop:augmented-shop-core"))
     api(project(":augmented-common:augmented-database:augmented-database-bukkit"))
+    api(project(":augmented-common:augmented-gui"))
 }
 
 bukkit {

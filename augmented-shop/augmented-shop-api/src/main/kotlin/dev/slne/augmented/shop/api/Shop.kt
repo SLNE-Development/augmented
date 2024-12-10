@@ -1,5 +1,7 @@
 package dev.slne.augmented.shop.api
 
+import dev.slne.augmented.common.base.core.block.BlockLocation
+import net.kyori.adventure.key.Key
 import java.util.*
 
 interface Shop {
@@ -13,10 +15,8 @@ interface Shop {
     var permittedUsers: Set<UUID>?
 
     var server: String?
-    var world: String?
-    var x: Double?
-    var y: Double?
-    var z: Double?
+    var world: UUID?
+    var location: BlockLocation?
 
     var sellPrice: Double?
     var buyPrice: Double?
@@ -28,4 +28,11 @@ interface Shop {
     var buyPaused: Boolean?
 
     var stockAmount: Int?
+
+    suspend fun save(): Shop
+    suspend fun delete(): Shop
+
+    companion object {
+        val SHOP_KEY = Key.key("augmented", "shop")
+    }
 }

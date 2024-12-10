@@ -5,9 +5,6 @@ plugins {
 rootProject.name = "augmented"
 
 // region Common
-include("augmented-common:augmented-database")
-include("augmented-common:augmented-gui")
-
 // region Common Base
 include("augmented-common:augmented-base:augmented-base-core")
 include("augmented-common:augmented-base:augmented-base-bukkit")
@@ -17,9 +14,14 @@ include("augmented-common:augmented-base:augmented-base-bukkit")
 include("augmented-common:augmented-database:augmented-database-core")
 include("augmented-common:augmented-database:augmented-database-bukkit")
 // endregion
+
+// region Common GUI
+include("augmented-common:augmented-gui")
+//endregion
 // endregion
 
 // region Shop
 include("augmented-shop:augmented-shop-api")
 include("augmented-shop:augmented-shop-core")
 include("augmented-shop:augmented-shop-bukkit")
+// endregion

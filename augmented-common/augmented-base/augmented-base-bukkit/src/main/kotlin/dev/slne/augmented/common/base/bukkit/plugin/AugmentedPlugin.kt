@@ -1,6 +1,6 @@
 package dev.slne.augmented.common.base.bukkit.plugin
 
-import com.github.shynixn.mccoroutine.bukkit.SuspendingJavaPlugin
+import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.augmented.common.base.bukkit.instance.AugmentedBukkitInstance
 import dev.slne.augmented.common.base.core.instance.AugmentedInstance
 import net.kyori.adventure.platform.bukkit.BukkitAudiences
@@ -11,7 +11,7 @@ val plugin: AugmentedPlugin
 
 abstract class AugmentedPlugin : SuspendingJavaPlugin() {
 
-    private lateinit var audiences: BukkitAudiences
+    lateinit var audiences: BukkitAudiences
 
     override suspend fun onLoadAsync() {
         AugmentedInstance.AugmentedInstanceHolder.instance = AugmentedBukkitInstance()

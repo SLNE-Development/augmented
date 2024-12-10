@@ -1,7 +1,10 @@
 package dev.slne.augmented.shop.core
 
+import dev.slne.augmented.common.base.core.block.BlockLocation
+import dev.slne.augmented.common.database.core.models.converter.BlockLocationConverter
 import dev.slne.augmented.common.database.core.models.converter.UuidConverter
 import dev.slne.augmented.shop.api.Shop
+import dev.slne.augmented.shop.core.service.ShopService
 import jakarta.persistence.*
 import org.hibernate.annotations.JdbcTypeCode
 import java.sql.Types
@@ -9,7 +12,23 @@ import java.util.*
 
 @Entity
 @Table(name = "augmented_shops")
-open class CoreShop : Shop {
+class CoreShop() : Shop {
+
+    constructor(
+        material: String,
+        shopOwner: UUID,
+        server: String,
+        world: UUID,
+        location: BlockLocation
+    ) : this() {
+        this.shopKey = UUID.randomUUID()
+
+        this.material = material
+        this.shopOwner = shopOwner
+        this.server = server
+        this.world = world
+        this.location = location
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,17 +61,15 @@ open class CoreShop : Shop {
     @Column(name = "location_server")
     override var server: String? = null
 
-    @Column(name = "location_world")
-    override var world: String? = null
+    @Column(name = "location_world", length = 36)
+    @Convert(converter = UuidConverter::class)
+    @JdbcTypeCode(Types.CHAR)
+    override var world: UUID? = null
 
-    @Column(name = "location_x")
-    override var x: Double? = null
-
-    @Column(name = "location_y")
-    override var y: Double? = null
-
-    @Column(name = "location_z")
-    override var z: Double? = null
+    @Column(name = "location", length = 12)
+    @Convert(converter = BlockLocationConverter::class)
+    @JdbcTypeCode(Types.BINARY)
+    override var location: BlockLocation? = null
 
     @Column(name = "sell_price")
     override var sellPrice: Double? = null
@@ -75,8 +92,54 @@ open class CoreShop : Shop {
     @Column(name = "stock_amount")
     override var stockAmount: Int? = null
 
+    private var databaseLocked: Boolean = false
+
+    override suspend fun save(): Shop {
+        if (databaseLocked) {
+            throw IllegalStateException("Shop $shopKey is currently database locked and thus cannot be saved.")
+        }
+
+        databaseLocked = true
+        ShopService.saveShop(this)
+        databaseLocked = false
+
+        return this
+    }
+
+    override suspend fun delete(): Shop {
+        if (databaseLocked) {
+            throw IllegalStateException("Shop $shopKey is currently database locked and thus cannot be deleted.")
+        }
+
+        databaseLocked = true
+        ShopService.deleteShop(this)
+        databaseLocked = false
+
+        return this
+    }
+
     override fun toString(): String {
-        return "CoreShop(id=$id, material=$material, shopKey=$shopKey, shopOwner=$shopOwner, permittedUsers=$permittedUsers, server=$server, world=$world, x=$x, y=$y, z=$z, sellPrice=$sellPrice, buyPrice=$buyPrice, buyLimit=$buyLimit, sellLimit=$sellLimit, sellPaused=$sellPaused, buyPaused=$buyPaused, stockAmount=$stockAmount)"
+        return "CoreShop(id=$id, material=$material, shopKey=$shopKey, shopOwner=$shopOwner, permittedUsers=$permittedUsers, server=$server, world=$world, location=$location, sellPrice=$sellPrice, buyPrice=$buyPrice, buyLimit=$buyLimit, sellLimit=$sellLimit, sellPaused=$sellPaused, buyPaused=$buyPaused, stockAmount=$stockAmount)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as CoreShop
+
+        if (id != other.id) return false
+        if (shopKey != other.shopKey) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+
+        result = 31 * result + (shopKey?.hashCode() ?: 0)
+
+        return result
     }
 
 }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DiffGenerationConfig">
+  <component name="DiffGenerationConfig" isInitGenerateDdl="true">
+    <option name="initGenerateDdl" value="true" />
     <option name="sourceModelValue" value="augmented.augmented-shop.augmented-shop-core.main:augmented.augmented-shop.augmented-shop-core.main" />
+    <option name="targetDbValue" value="ee37ba71-95a4-4a39-a97e-45713e24f9d6__s23_augmented_shops" />
   </component>
 </project>

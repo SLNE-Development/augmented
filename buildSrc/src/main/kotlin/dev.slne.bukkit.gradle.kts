@@ -8,6 +8,6 @@ dependencies {
     compileOnlyApi(libs.findLibrary("commandapi-bukkit").orElseThrow())
     compileOnlyApi(libs.findLibrary("commandapi-bukkit-kotlin").orElseThrow())
     compileOnlyApi(spigotApi)
-    api(libs.findLibrary("mccoroutine-bukkit").orElseThrow())
-    api(libs.findLibrary("mccoroutine-bukkit-core").orElseThrow())
+    api(libs.findLibrary("mccoroutine-folia").orElseThrow())
+    api(libs.findLibrary("mccoroutine-folia-core").orElseThrow())
 }

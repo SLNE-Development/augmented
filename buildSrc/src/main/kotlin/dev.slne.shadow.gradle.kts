@@ -9,4 +9,6 @@ tasks.withType<ShadowJar> {
     archiveFileName.set("${project.name}-shadow.jar")
 
     relocate("net.kyori", "dev.slne.augmented.libs.relocated.kyori")
+
+    mergeServiceFiles()
 }
