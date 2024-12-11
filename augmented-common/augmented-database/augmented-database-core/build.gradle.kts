@@ -1,6 +1,6 @@
 plugins {
-    id("common-conventions")
-    id("shadow-conventions")
+    `common-conventions`
+    `shadow-conventions`
 }
 
 dependencies {

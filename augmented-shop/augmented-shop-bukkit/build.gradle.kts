@@ -1,8 +1,8 @@
 plugins {
-    id("common-conventions")
-    id("shadow-conventions")
-    id("bukkit-conventions")
-    id("bukkit-server-conventions")
+    `common-conventions`
+    `shadow-conventions`
+    `bukkit-conventions`
+    `bukkit-server-conventions`
 }
 
 dependencies {
