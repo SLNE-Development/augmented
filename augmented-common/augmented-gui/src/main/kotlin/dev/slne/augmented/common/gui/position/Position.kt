@@ -1,13 +1,12 @@
 package dev.slne.augmented.common.gui.position
 
-import com.google.common.base.Preconditions
 import dev.slne.augmented.common.gui.pane.GuiPane
 
 class Position(val x: Int, val y: Int) {
 
     init {
-        Preconditions.checkArgument(x >= 0, "X must be greater or equal to 0")
-        Preconditions.checkArgument(y >= 0, "Y must be greater or equal to 0")
+        require(x >= 0) { "X must be greater or equal to 0" }
+        require(y >= 0) { "Y must be greater or equal to 0" }
     }
 
     fun inBounds(guiPane: GuiPane): Boolean {
