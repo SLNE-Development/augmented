@@ -4,6 +4,6 @@ plugins {
 }
 
 dependencies {
-    api(project(":augmented-common:augmented-base:augmented-base-core"))
-    api(project(":augmented-common:augmented-database:augmented-database-core"))
+    compileOnlyApi(project(":augmented-common:augmented-base:augmented-base-core"))
+    compileOnlyApi(project(":augmented-common:augmented-database:augmented-database-core"))
 }

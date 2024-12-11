@@ -1,22 +1,29 @@
 import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
-    `java-library`
+    `common-conventions`
+    `shadow-conventions`
+    `bukkit-conventions`
 
     id("net.minecrell.plugin-yml.bukkit")
     id("net.minecrell.plugin-yml.paper")
-    id("xyz.jpenilla.run-paper")
+}
+
+dependencies {
+    api(project(":augmented-common:augmented-base:augmented-base-bukkit"))
+    api(project(":augmented-common:augmented-database:augmented-database-bukkit"))
 }
 
 bukkit {
     name = project.name
-    version = findProperty("version") as String? ?: "1.0.0-SNAPSHOT"
+    version = rootProject.findProperty("version") as String? ?: "1.0.0-SNAPSHOT"
 
     foliaSupported = false
     apiVersion = "1.21"
     authors = listOf("SLNE Development", "Ammo")
 
-    depend = listOf("CommandAPI", "augmented-base-plugin-bukkit")
+    depend = listOf("CommandAPI")
+    main = "dev.slne.augmented.common.base.plugin.bukkit.AugmentedBukkitPlugin"
 }
 
 paper {
@@ -26,30 +33,12 @@ paper {
     foliaSupported = false
     apiVersion = "1.21"
     authors = listOf("SLNE Development", "Ammo")
+    main = "dev.slne.augmented.common.base.plugin.bukkit.AugmentedBukkitPlugin"
 
     serverDependencies {
         register("CommandAPI") {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
-        register("augmented-base-plugin-bukkit") {
-            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
-            required = true
-            joinClasspath = true
-        }
-    }
-}
-
-tasks.runServer {
-    minecraftVersion("1.21.1")
-
-    pluginJars.from(
-        project(":augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-bukkit").tasks.named(
-            "shadowJar"
-        )
-    )
-
-    downloadPlugins {
-        modrinth("commandapi", "9.6.0")
     }
 }

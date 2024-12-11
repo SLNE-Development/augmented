@@ -18,6 +18,11 @@ include("augmented-common:augmented-database:augmented-database-bukkit")
 // region Common GUI
 include("augmented-common:augmented-gui")
 //endregion
+
+// region Common Plugins
+include("augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-bukkit")
+include("augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-velocity")
+// endregion
 // endregion
 
 // region Shop

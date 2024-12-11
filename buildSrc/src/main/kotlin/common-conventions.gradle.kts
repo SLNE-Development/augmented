@@ -22,10 +22,6 @@ repositories {
 
 val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")
 dependencies {
-    api(libs.findLibrary("fastutil").orElseThrow())
-    api(libs.findLibrary("coroutines").orElseThrow())
-
-    implementation(libs.findLibrary("autoservice").orElseThrow())
     kapt(libs.findLibrary("autoservice").orElseThrow())
 }
 

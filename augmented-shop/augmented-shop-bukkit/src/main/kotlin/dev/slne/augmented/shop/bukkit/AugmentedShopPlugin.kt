@@ -2,8 +2,8 @@ package dev.slne.augmented.shop.bukkit
 
 import com.github.shynixn.mccoroutine.folia.regionDispatcher
 import com.github.shynixn.mccoroutine.folia.registerSuspendingEvents
+import dev.slne.augmented.common.base.bukkit.plugin.AugmentedPlugin
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
-import dev.slne.augmented.common.database.bukkit.plugin.AugmentedDatabasePlugin
 import dev.slne.augmented.common.database.core.persistence.AugmentedPersistence
 import dev.slne.augmented.shop.api.shopManager
 import dev.slne.augmented.shop.bukkit.commands.ShopCommand
@@ -15,7 +15,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import kotlin.coroutines.CoroutineContext
 
-class AugmentedShopPlugin : AugmentedDatabasePlugin() {
+class AugmentedShopPlugin : AugmentedPlugin() {
 
     override suspend fun onLoadAsync() {
         super.onLoadAsync()
