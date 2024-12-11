@@ -35,3 +35,11 @@ class Position(val x: Int, val y: Int) {
         }
     }
 }
+
+fun pos(x: Int, y: Int): Position {
+    return Position.from(x, y)
+}
+
+fun absPos(absolute: Int): Position {
+    return Position.fromAbsolute(absolute)
+}
