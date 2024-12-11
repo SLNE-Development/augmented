@@ -14,3 +14,7 @@ dependencies {
 bukkit {
     main = "dev.slne.augmented.shop.bukkit.AugmentedShopPlugin"
 }
+
+tasks.runServer {
+//    pluginJars.from(project(":augmented-shop:augmented-shop-core").tasks.shadowJar)
+}
