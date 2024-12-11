@@ -10,16 +10,14 @@ import org.bukkit.plugin.java.JavaPlugin
 
 object GuiManager {
 
-    private val guis: ObjectSet<Gui> = mutableObjectSetOf()
+    private val guis = mutableObjectSetOf<Gui>()
 
     fun register(gui: Gui) = guis.add(gui)
     fun unregister(gui: Gui) = guis.remove(gui)
 
     fun getGuis() = guis.freeze()
 
-    fun findGui(inventory: Inventory) =
-        findGuiOrNull(inventory) ?: throw IllegalArgumentException("Inventory is not a GUI")
-
+    fun findGui(inventory: Inventory) = findGuiOrNull(inventory) ?: error("Inventory is not a GUI")
     fun findGuiOrNull(inventory: Inventory) = guis.firstOrNull { it.inventory == inventory }
 
     fun registerListeners(plugin: JavaPlugin) {
