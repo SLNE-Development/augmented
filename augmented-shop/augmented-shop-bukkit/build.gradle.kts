@@ -1,8 +1,8 @@
 plugins {
-    id("dev.slne.common")
-    id("dev.slne.shadow")
-    id("dev.slne.bukkit")
-    id("dev.slne.bukkit-server")
+    `common-conventions`
+    `shadow-conventions`
+    `bukkit-conventions`
+    `bukkit-server-conventions`
 }
 
 dependencies {

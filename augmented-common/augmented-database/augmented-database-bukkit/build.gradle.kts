@@ -1,6 +1,6 @@
 plugins {
-    id("dev.slne.common")
-    id("dev.slne.shadow")
+    `common-conventions`
+    `shadow-conventions`
 }
 
 dependencies {
