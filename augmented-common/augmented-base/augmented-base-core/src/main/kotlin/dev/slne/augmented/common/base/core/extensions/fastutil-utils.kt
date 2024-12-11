@@ -38,6 +38,8 @@ fun <T> ObjectArrayList<T>.synchronize(): ObjectList<T> = ObjectLists.synchroniz
 fun <T> ObjectArrayList<T>.freeze(): @UnmodifiableView ObjectList<T> =
     ObjectLists.unmodifiable(this)
 
+fun <T> ObjectList<T>.freeze(): @UnmodifiableView ObjectList<T> = ObjectLists.unmodifiable(this)
+
 fun <T> Sequence<T>.toMutableObjectList() = ObjectArrayList<T>().apply { addAll(toList()) }
 fun <T> Sequence<T>.toObjectList() = toMutableObjectList().freeze()
 fun <T> Collection<T>.toObjectList() = this as? ObjectList<T> ?: ObjectArrayList<T>(this).freeze()

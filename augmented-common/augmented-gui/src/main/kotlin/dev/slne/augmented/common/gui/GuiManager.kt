@@ -8,6 +8,9 @@ import it.unimi.dsi.fastutil.objects.ObjectSet
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.java.JavaPlugin
 
+fun main() {
+}
+
 object GuiManager {
 
     private val guis: ObjectSet<Gui> = mutableObjectSetOf()
