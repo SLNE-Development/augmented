@@ -7,7 +7,7 @@ import dev.slne.augmented.common.base.bukkit.item.buildItem
 import dev.slne.augmented.common.base.bukkit.item.displayName
 import dev.slne.augmented.common.base.bukkit.item.persistentData
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
-import dev.slne.augmented.common.base.core.block.BlockLocation
+import dev.slne.augmented.common.base.core.block.BlockPosition
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.core.CoreShop
 import kotlinx.coroutines.withContext
@@ -49,7 +49,7 @@ fun CoreShop(
     shopOwner: UUID,
     server: String,
     world: World,
-    location: BlockLocation
+    location: BlockPosition
 ): CoreShop {
     return CoreShop(
         material.key.toString(),

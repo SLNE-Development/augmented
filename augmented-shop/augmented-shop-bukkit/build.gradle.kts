@@ -1,6 +1,6 @@
 plugins {
     `common-conventions`
-    `shadow-conventions`
+    `shadow-plugin-conventions`
     `bukkit-conventions`
     `bukkit-server-conventions`
 }
@@ -11,14 +11,6 @@ dependencies {
     compileOnlyApi(project(":augmented-common:augmented-gui"))
 }
 
-bukkit {
-    main = "dev.slne.augmented.shop.bukkit.AugmentedShopPlugin"
-}
-
 paper {
     main = "dev.slne.augmented.shop.bukkit.AugmentedShopPlugin"
-}
-
-tasks.runServer {
-//    pluginJars.from(project(":augmented-shop:augmented-shop-core").tasks.shadowJar)
 }

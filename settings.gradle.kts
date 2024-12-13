@@ -4,29 +4,35 @@ plugins {
 
 rootProject.name = "augmented"
 
-// region Common
-// region Common Base
-include("augmented-common:augmented-base:augmented-base-core")
-include("augmented-common:augmented-base:augmented-base-bukkit")
-// endregion
+val projects: List<Pair<String, String>> = listOf(
+    // region Common
+    // region Common Base
+    "augmented-common:augmented-base:augmented-base-core" to "AugmentedBaseCore",
+    "augmented-common:augmented-base:augmented-base-bukkit" to "AugmentedBaseBukkit",
+    // endregion
 
-// region Common Database
-include("augmented-common:augmented-database:augmented-database-core")
-include("augmented-common:augmented-database:augmented-database-bukkit")
-// endregion
+    // region Common Database
+    "augmented-common:augmented-database:augmented-database-core" to "AugmentedDatabaseCore",
+    "augmented-common:augmented-database:augmented-database-bukkit" to "AugmentedDatabaseBukkit",
+    // endregion
 
-// region Common GUI
-include("augmented-common:augmented-gui")
-//endregion
+    // region Common GUI
+    "augmented-common:augmented-gui" to "AugmentedGui",
+    //endregion
 
-// region Common Plugins
-include("augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-bukkit")
-include("augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-velocity")
-// endregion
-// endregion
+    // region Common Plugins
+    "augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-bukkit" to "AugmentedBasePluginBukkit",
+    "augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-velocity" to "AugmentedBasePluginVelocity",
+    // endregion
+    // endregion
 
-// region Shop
-include("augmented-shop:augmented-shop-api")
-include("augmented-shop:augmented-shop-core")
-include("augmented-shop:augmented-shop-bukkit")
-// endregion
+    // region Shop
+    "augmented-shop:augmented-shop-api" to "AugmentedShopApi",
+    "augmented-shop:augmented-shop-core" to "AugmentedShopCore",
+    "augmented-shop:augmented-shop-bukkit" to "AugmentedShopBukkit",
+    // endregion
+)
+
+projects.forEach { (path, name) ->
+    include(path)
+}

@@ -10,6 +10,6 @@ fun NamespacedKey.toAdventure() = Key.key(namespace, key)
 
 fun Key.toNamespacedKey() = NamespacedKey.fromString(toString())!!
 
-fun Sound.Builder.type(sound: org.bukkit.Sound) = type(sound.key.toAdventure())
+fun Sound.Builder.type(sound: org.bukkit.Sound) = type(sound.key())
 
 fun Component.toLegacy() = LegacyComponentSerializer.legacySection().serialize(this)

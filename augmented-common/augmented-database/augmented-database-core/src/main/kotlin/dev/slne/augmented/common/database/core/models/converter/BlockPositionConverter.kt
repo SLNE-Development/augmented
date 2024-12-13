@@ -1,14 +1,14 @@
 package dev.slne.augmented.common.database.core.models.converter
 
-import dev.slne.augmented.common.base.core.block.BlockLocation
+import dev.slne.augmented.common.base.core.block.BlockPosition
 import jakarta.persistence.AttributeConverter
 import jakarta.persistence.Converter
 import java.nio.ByteBuffer
 
 @Converter(autoApply = true)
-class BlockLocationConverter : AttributeConverter<BlockLocation, ByteArray> {
+class BlockPositionConverter : AttributeConverter<BlockPosition, ByteArray> {
 
-    override fun convertToDatabaseColumn(attribute: BlockLocation): ByteArray {
+    override fun convertToDatabaseColumn(attribute: BlockPosition): ByteArray {
         val buffer = ByteBuffer.allocate(12)
 
         buffer.putInt(attribute.x)
@@ -18,13 +18,13 @@ class BlockLocationConverter : AttributeConverter<BlockLocation, ByteArray> {
         return buffer.array()
     }
 
-    override fun convertToEntityAttribute(dbData: ByteArray): BlockLocation {
+    override fun convertToEntityAttribute(dbData: ByteArray): BlockPosition {
         val buffer = ByteBuffer.wrap(dbData)
 
         val x = buffer.int
         val y = buffer.int
         val z = buffer.int
 
-        return BlockLocation(x, y, z)
+        return BlockPosition(x, y, z)
     }
 }

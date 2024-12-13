@@ -1,6 +1,5 @@
 package dev.slne.augmented.common.base.bukkit.item
 
-import dev.slne.augmented.common.base.bukkit.extensions.toLegacy
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
@@ -31,24 +30,18 @@ fun buildItem(
 }
 
 inline fun <reified M : ItemMeta> ItemStack.meta(crossinline init: (@MetaMarker M).() -> Unit) {
-    val meta = itemMeta as? M ?: return
-    meta.init()
-    itemMeta = meta
+    editMeta(M::class.java) { it.init() }
 }
 
 fun ItemStack.displayName(name: Component) {
     meta<ItemMeta> {
-        setDisplayName(
-            name.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE).toLegacy()
-        )
+        displayName(name.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE))
     }
 }
 
 fun ItemStack.lore(vararg lore: Component) {
     meta<ItemMeta> {
-        setLore(lore.map {
-            it.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE).toLegacy()
-        })
+        lore(lore.map { it.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE) })
     }
 }
 

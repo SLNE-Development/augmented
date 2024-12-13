@@ -1,6 +1,6 @@
 package dev.slne.augmented.shop.api
 
-import dev.slne.augmented.common.base.core.block.BlockLocation
+import dev.slne.augmented.common.base.core.block.BlockPosition
 import net.kyori.adventure.key.Key
 import java.util.*
 
@@ -16,7 +16,7 @@ interface Shop {
 
     var server: String?
     var world: UUID?
-    var location: BlockLocation?
+    var location: BlockPosition?
 
     var sellPrice: Double?
     var buyPrice: Double?

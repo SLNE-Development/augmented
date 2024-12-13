@@ -5,7 +5,6 @@ import dev.jorel.commandapi.kotlindsl.getValue
 import dev.jorel.commandapi.kotlindsl.integerArgument
 import dev.jorel.commandapi.kotlindsl.playerExecutor
 import dev.jorel.commandapi.kotlindsl.subcommand
-import dev.slne.augmented.common.base.bukkit.extensions.sendMessage
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.api.util.ShopPermissionRegistry

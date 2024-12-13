@@ -10,5 +10,7 @@ tasks.withType<ShadowJar> {
 
     mergeServiceFiles()
 
-    isZip64 = true
+    exclude("kotlin/**")
+    exclude("org/jetbrains/**")
+    exclude("org/intellij/**")
 }

@@ -1,5 +1,6 @@
 package dev.slne.augmented.common.base.core.extensions
 
+import com.github.benmanes.caffeine.cache.LoadingCache
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
@@ -151,4 +152,9 @@ fun <K> Object2IntOpenHashMap<K>.synchronize(): Object2IntMap<K> = Object2IntMap
 fun <K> Object2IntOpenHashMap<K>.freeze(): @UnmodifiableView Object2IntMap<K> =
     Object2IntMaps.unmodifiable(this)
 // endregion
+// endregion
+
+// region LoadingCache
+fun <K, V> LoadingCache<K, V>.asObjectMap(): @Unmodifiable Object2ObjectMap<K, V> =
+    Object2ObjectOpenHashMap(this.asMap()).freeze()
 // endregion

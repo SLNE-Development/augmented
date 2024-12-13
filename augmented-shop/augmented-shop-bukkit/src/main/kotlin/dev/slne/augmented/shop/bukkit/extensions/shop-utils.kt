@@ -1,6 +1,5 @@
 package dev.slne.augmented.shop.bukkit.extensions
 
-import dev.slne.augmented.common.base.bukkit.extensions.toBlockLocation
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.api.shopManager
 import org.bukkit.NamespacedKey

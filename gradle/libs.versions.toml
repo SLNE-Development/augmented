@@ -9,7 +9,7 @@ commandapi-bukkit = "9.6.0"
 commandapi-bukkit-kotlin = "9.6.0"
 commandapi-velocity = "9.6.0-SNAPSHOT"
 commandapi-velocity-kotlin = "9.6.0-SNAPSHOT"
-spigot-api = "1.21.1-R0.1-SNAPSHOT"
+paper-api = "1.21.1-R0.1-SNAPSHOT"
 paperweight = "1.7.4"
 velocity-api = "3.4.0-SNAPSHOT"
 coroutines = "1.9.0"
@@ -40,7 +40,7 @@ commandapi-bukkit = { module = "dev.jorel:commandapi-bukkit-core", version.ref =
 commandapi-bukkit-kotlin = { module = "dev.jorel:commandapi-bukkit-kotlin", version.ref = "commandapi-bukkit-kotlin" }
 commandapi-velocity = { module = "dev.jorel:commandapi-velocity-shade", version.ref = "commandapi-velocity" }
 commandapi-velocity-kotlin = { module = "dev.jorel:commandapi-velocity-kotlin", version.ref = "commandapi-velocity-kotlin" }
-spigot-api = { module = "org.spigotmc:spigot-api", version.ref = "spigot-api" }
+paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
 paperweight = { module = "io.papermc.paperweight:paperweight-userdev", version.ref = "paperweight" }
 velocity-api = { module = "com.velocitypowered:velocity-api", version.ref = "velocity-api" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }

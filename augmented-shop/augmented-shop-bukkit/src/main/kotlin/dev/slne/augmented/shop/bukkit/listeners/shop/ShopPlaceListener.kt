@@ -1,10 +1,7 @@
 package dev.slne.augmented.shop.bukkit.listeners.shop
 
 import com.github.shynixn.mccoroutine.folia.entityDispatcher
-import dev.slne.augmented.common.base.bukkit.extensions.playSound
-import dev.slne.augmented.common.base.bukkit.extensions.sendMessage
-import dev.slne.augmented.common.base.bukkit.extensions.toBlockLocation
-import dev.slne.augmented.common.base.bukkit.extensions.type
+import dev.slne.augmented.common.base.bukkit.extensions.toPosition
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.shop.bukkit.extensions.CoreShop
 import dev.slne.augmented.shop.bukkit.extensions.isShopItem
@@ -28,7 +25,7 @@ object ShopPlaceListener : Listener {
             player.uniqueId,
             "test",
             block.location.world!!,
-            block.location.toBlockLocation()
+            block.location.toPosition()
         ).save()
 
         withContext(plugin.entityDispatcher(player)) {

@@ -1,7 +1,7 @@
 package dev.slne.augmented.shop.core
 
-import dev.slne.augmented.common.base.core.block.BlockLocation
-import dev.slne.augmented.common.database.core.models.converter.BlockLocationConverter
+import dev.slne.augmented.common.base.core.block.BlockPosition
+import dev.slne.augmented.common.database.core.models.converter.BlockPositionConverter
 import dev.slne.augmented.common.database.core.models.converter.UuidConverter
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.core.service.ShopService
@@ -19,7 +19,7 @@ class CoreShop() : Shop {
         shopOwner: UUID,
         server: String,
         world: UUID,
-        location: BlockLocation
+        location: BlockPosition
     ) : this() {
         this.shopKey = UUID.randomUUID()
 
@@ -67,9 +67,9 @@ class CoreShop() : Shop {
     override var world: UUID? = null
 
     @Column(name = "location", length = 12)
-    @Convert(converter = BlockLocationConverter::class)
+    @Convert(converter = BlockPositionConverter::class)
     @JdbcTypeCode(Types.BINARY)
-    override var location: BlockLocation? = null
+    override var location: BlockPosition? = null
 
     @Column(name = "sell_price")
     override var sellPrice: Double? = null

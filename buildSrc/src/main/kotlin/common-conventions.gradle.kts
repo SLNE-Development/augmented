@@ -14,10 +14,7 @@ repositories {
 
     maven("https://repo.codemc.org/repository/maven-public/")
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
-    maven {
-        name = "spigot-repo"
-        url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    }
+    maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
 }
 
 val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")

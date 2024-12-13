@@ -1,9 +1,6 @@
 package dev.slne.augmented.shop.bukkit.listeners.shop
 
 import com.github.shynixn.mccoroutine.folia.entityDispatcher
-import dev.slne.augmented.common.base.bukkit.extensions.playSound
-import dev.slne.augmented.common.base.bukkit.extensions.sendMessage
-import dev.slne.augmented.common.base.bukkit.extensions.type
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.shop.bukkit.extensions.getShop
 import kotlinx.coroutines.withContext
