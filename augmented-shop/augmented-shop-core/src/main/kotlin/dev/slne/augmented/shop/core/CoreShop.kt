@@ -92,6 +92,7 @@ class CoreShop() : Shop {
     @Column(name = "stock_amount")
     override var stockAmount: Int? = null
 
+    @Transient
     private var databaseLocked: Boolean = false
 
     override suspend fun save(): Shop {
