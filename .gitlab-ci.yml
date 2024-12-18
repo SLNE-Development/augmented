@@ -1,0 +1,17 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "Building the application"
+    - gradle build
+    - echo "Build completed"
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the application"
+    - gradle publish
+    - echo "Deployment completed"
