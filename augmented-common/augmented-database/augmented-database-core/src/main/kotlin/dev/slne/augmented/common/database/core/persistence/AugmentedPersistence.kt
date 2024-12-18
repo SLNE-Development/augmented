@@ -20,14 +20,6 @@ object AugmentedPersistence {
         annotatedClasses.add(clazz)
     }
 
-    fun addAnnotatedClasses(classes: Collection<KClass<*>>) {
-        annotatedClasses.addAll(classes)
-    }
-
-    fun addAnnotatedClasses(vararg classes: KClass<*>) {
-        annotatedClasses.addAll(classes)
-    }
-
     fun configureHibernate(): SessionFactory {
         val config = DatabaseConfigHolder.config!!
         val hikari = config.hikari
