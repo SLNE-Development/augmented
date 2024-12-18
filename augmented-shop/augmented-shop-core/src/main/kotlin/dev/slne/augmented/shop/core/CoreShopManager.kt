@@ -17,19 +17,20 @@ class CoreShopManager : ShopManager, Services.Fallback {
     override val shops: ObjectSet<Shop> get() = _shops.freeze()
     private val _shops = mutableObjectSetOf<Shop>().synchronize()
 
-    override suspend fun saveShop(shop: Shop): Shop {
+    override fun addShop(shop: Shop): Shop {
         _shops.add(shop)
-        shop.save()
 
         return shop
     }
 
-    override suspend fun deleteShop(shop: Shop): Shop {
+    override fun removeShop(shop: Shop): Shop {
         _shops.remove(shop)
-        shop.delete()
 
         return shop
     }
+
+    override suspend fun saveShop(shop: Shop) = ShopService.saveShop(addShop(shop))
+    override suspend fun deleteShop(shop: Shop) = ShopService.deleteShop(removeShop(shop))
 
     override suspend fun fetchShops(): ObjectSet<Shop> {
         isFetched = false

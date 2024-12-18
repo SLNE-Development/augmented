@@ -9,10 +9,12 @@ import dev.slne.augmented.shop.api.shopManager
 import dev.slne.augmented.shop.bukkit.commands.ShopCommand
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopDestroyListener
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopPlaceListener
+import dev.slne.augmented.shop.bukkit.listeners.world.WorldSaveListener
 import dev.slne.augmented.shop.core.CoreShop
 import org.bukkit.event.Event
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.event.world.WorldSaveEvent
 import kotlin.coroutines.CoroutineContext
 
 class AugmentedShopPlugin : AugmentedPlugin() {
@@ -32,8 +34,10 @@ class AugmentedShopPlugin : AugmentedPlugin() {
         ShopCommand
 
         // Listeners
-        server.pluginManager.registerSuspendingEvents(ShopPlaceListener, this, eventDispatcher)
-        server.pluginManager.registerSuspendingEvents(ShopDestroyListener, this, eventDispatcher)
+        val pluginManager = server.pluginManager
+        pluginManager.registerSuspendingEvents(ShopPlaceListener, this, eventDispatcher)
+        pluginManager.registerSuspendingEvents(ShopDestroyListener, this, eventDispatcher)
+        pluginManager.registerSuspendingEvents(WorldSaveListener, this, eventDispatcher)
     }
 
     override suspend fun onDisableAsync() {
@@ -48,6 +52,10 @@ class AugmentedShopPlugin : AugmentedPlugin() {
         BlockBreakEvent::class.java to {
             require(it is BlockBreakEvent)
             plugin.regionDispatcher(it.block.location)
+        },
+        WorldSaveEvent::class.java to {
+            require(it is WorldSaveEvent)
+            plugin.regionDispatcher(it.world.spawnLocation)
         }
     )
 }

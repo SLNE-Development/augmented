@@ -3,6 +3,7 @@ package dev.slne.augmented.shop.bukkit.listeners.shop
 import com.github.shynixn.mccoroutine.folia.entityDispatcher
 import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.shop.bukkit.extensions.getShop
+import dev.slne.augmented.shop.core.CoreShop
 import kotlinx.coroutines.withContext
 import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
@@ -15,7 +16,7 @@ object ShopDestroyListener : Listener {
 
     @EventHandler
     suspend fun BlockBreakEvent.onBreak() {
-        val shop = block.getShop() ?: return
+        val shop = block.getShop() as CoreShop? ?: return
 
         shop.delete()
 

@@ -1,4 +1,4 @@
-package dev.slne.augmented.shop.bukkit.commands.subcommands
+package dev.slne.augmented.shop.bukkit.commands.subcommands.admin
 
 import com.github.shynixn.mccoroutine.folia.launch
 import dev.jorel.commandapi.kotlindsl.getValue
@@ -12,8 +12,8 @@ import dev.slne.augmented.shop.bukkit.extensions.giveItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 
-val ShopGetCommand = subcommand("get") {
-    withPermission(ShopPermissionRegistry.COMMAND_SHOP_GET)
+val ShopAdminGetCommand = subcommand("get") {
+    withPermission(ShopPermissionRegistry.Admin.GET)
 
     integerArgument("amount", 1, 64)
 

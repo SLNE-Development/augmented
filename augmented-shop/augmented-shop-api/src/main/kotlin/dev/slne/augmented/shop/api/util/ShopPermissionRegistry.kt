@@ -2,7 +2,13 @@ package dev.slne.augmented.shop.api.util
 
 object ShopPermissionRegistry {
 
-    val COMMAND_SHOP = "augmented.shop.command.shop.base"
-    val COMMAND_SHOP_GET = "augmented.shop.command.shop.get"
+    val BASE = "augmented.shop.command.shop.base"
+
+    val ADMIN = "augmented.shop.admin"
+
+    object Admin {
+        val GET = "augmented.shop.admin.get"
+        val LIST_BROKEN = "augmented.shop.admin.list-broken"
+    }
 
 }

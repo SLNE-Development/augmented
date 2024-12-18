@@ -16,6 +16,8 @@ object ShopRepository {
 
     suspend fun deleteShop(shop: Shop) = sessionFactory.withSession { session ->
         session.remove(shop)
+
+        shop
     }
 
     suspend fun findAllShops(): ObjectList<Shop> = sessionFactory.withSession { session ->

@@ -4,7 +4,7 @@ import dev.slne.augmented.common.base.core.block.BlockPosition
 import dev.slne.augmented.common.database.core.models.converter.BlockPositionConverter
 import dev.slne.augmented.common.database.core.models.converter.UuidConverter
 import dev.slne.augmented.shop.api.Shop
-import dev.slne.augmented.shop.core.service.ShopService
+import dev.slne.augmented.shop.api.shopManager
 import jakarta.persistence.*
 import org.hibernate.annotations.JdbcTypeCode
 import java.sql.Types
@@ -92,32 +92,11 @@ class CoreShop() : Shop {
     @Column(name = "stock_amount")
     override var stockAmount: Int? = null
 
-    @Transient
-    private var databaseLocked: Boolean = false
+    override fun add() = shopManager.addShop(this)
+    override fun remove() = shopManager.removeShop(this)
 
-    override suspend fun save(): Shop {
-        if (databaseLocked) {
-            throw IllegalStateException("Shop $shopKey is currently database locked and thus cannot be saved.")
-        }
-
-        databaseLocked = true
-        ShopService.saveShop(this)
-        databaseLocked = false
-
-        return this
-    }
-
-    override suspend fun delete(): Shop {
-        if (databaseLocked) {
-            throw IllegalStateException("Shop $shopKey is currently database locked and thus cannot be deleted.")
-        }
-
-        databaseLocked = true
-        ShopService.deleteShop(this)
-        databaseLocked = false
-
-        return this
-    }
+    override suspend fun save() = shopManager.saveShop(this)
+    override suspend fun delete() = shopManager.deleteShop(this)
 
     override fun toString(): String {
         return "CoreShop(id=$id, material=$material, shopKey=$shopKey, shopOwner=$shopOwner, permittedUsers=$permittedUsers, server=$server, world=$world, location=$location, sellPrice=$sellPrice, buyPrice=$buyPrice, buyLimit=$buyLimit, sellLimit=$sellLimit, sellPaused=$sellPaused, buyPaused=$buyPaused, stockAmount=$stockAmount)"

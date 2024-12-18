@@ -26,7 +26,7 @@ object ShopPlaceListener : Listener {
             "test",
             block.location.world!!,
             block.location.toPosition()
-        ).save()
+        ).add()
 
         withContext(plugin.entityDispatcher(player)) {
             player.playSound(

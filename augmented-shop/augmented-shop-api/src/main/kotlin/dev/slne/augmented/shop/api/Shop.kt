@@ -29,6 +29,9 @@ interface Shop {
 
     var stockAmount: Int?
 
+    fun add(): Shop
+    fun remove(): Shop
+
     suspend fun save(): Shop
     suspend fun delete(): Shop
 

@@ -26,10 +26,12 @@ fun Shop.setMaterial(material: Material) {
 }
 
 fun Shop.getBukkitLocation(): Location? {
-    val shopWorld = world?.let { Bukkit.getWorld(it) } ?: return null
+    val shopWorld = getBukkitWorld() ?: return null
 
     return location?.toLocation(shopWorld)
 }
+
+fun Shop.getBukkitWorld(): World? = world?.let { Bukkit.getWorld(it) }
 
 suspend fun Shop.Companion.giveItem(player: Player, amount: Int = 1) =
     withContext(plugin.entityDispatcher(player)) {

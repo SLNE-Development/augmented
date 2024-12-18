@@ -12,6 +12,9 @@ interface ShopManager {
 
     suspend fun fetchShops(): @Unmodifiable ObjectSet<Shop>
 
+    fun addShop(shop: Shop): Shop
+    fun removeShop(shop: Shop): Shop
+
     suspend fun saveShop(shop: Shop): Shop
     suspend fun deleteShop(shop: Shop): Shop
 
