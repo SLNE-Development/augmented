@@ -22,7 +22,6 @@ class CoreShop() : Shop {
         location: BlockPosition
     ) : this() {
         this.shopKey = UUID.randomUUID()
-
         this.material = material
         this.shopOwner = shopOwner
         this.server = server
