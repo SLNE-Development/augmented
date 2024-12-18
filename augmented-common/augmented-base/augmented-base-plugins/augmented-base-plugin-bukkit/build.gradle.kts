@@ -29,5 +29,10 @@ paper {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
+        register("augmented-shop-bukkit") {
+            load = PaperPluginDescription.RelativeLoadOrder.AFTER
+            required = false
+            joinClasspath = true
+        }
     }
 }
