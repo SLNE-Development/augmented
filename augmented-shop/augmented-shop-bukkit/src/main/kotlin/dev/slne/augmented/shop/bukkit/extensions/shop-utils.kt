@@ -1,5 +1,6 @@
 package dev.slne.augmented.shop.bukkit.extensions
 
+import dev.slne.augmented.common.base.bukkit.extensions.equalsLocation
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.api.shopManager
 import org.bukkit.NamespacedKey
@@ -15,9 +16,9 @@ fun ItemStack.isShopItem(): Boolean {
 }
 
 fun Block.isShop(): Boolean {
-    return shopManager.shops.any { it.location == this.location.toBlockLocation() }
+    return shopManager.shops.any { it.location?.equalsLocation(this.location.toBlockLocation()) == true }
 }
 
 fun Block.getShop(): Shop? {
-    return shopManager.shops.firstOrNull { it.location == this.location.toBlockLocation() }
+    return shopManager.shops.firstOrNull { it.location?.equalsLocation(this.location.toBlockLocation()) == true }
 }
