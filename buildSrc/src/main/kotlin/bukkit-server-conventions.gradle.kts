@@ -9,9 +9,9 @@ plugins {
 
 paper {
     name = project.name
-    version = rootProject.findProperty("version") as String? ?: "1.0.0-SNAPSHOT"
+    version = rootProject.findProperty("version") as String? ?: "undefined"
 
-    foliaSupported = false
+    foliaSupported = true
     apiVersion = "1.21"
     authors = listOf("SLNE Development", "Ammo")
 
@@ -28,16 +28,15 @@ paper {
         register("packetuxui-bukkit") {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
-            joinClasspath = true
         }
         register("packetevents") {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
-            joinClasspath = true
         }
     }
 }
 
+runPaper.folia.registerTask()
 tasks.runServer {
     minecraftVersion("1.21.1")
 

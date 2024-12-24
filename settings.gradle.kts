@@ -16,10 +16,6 @@ val projects: List<Pair<String, String>> = listOf(
     "augmented-common:augmented-database:augmented-database-bukkit" to "AugmentedDatabaseBukkit",
     // endregion
 
-    // region Common GUI
-    "augmented-common:augmented-gui" to "AugmentedGui",
-    //endregion
-
     // region Common Plugins
     "augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-bukkit" to "AugmentedBasePluginBukkit",
     "augmented-common:augmented-base:augmented-base-plugins:augmented-base-plugin-velocity" to "AugmentedBasePluginVelocity",

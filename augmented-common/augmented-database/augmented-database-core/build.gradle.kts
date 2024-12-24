@@ -4,10 +4,9 @@ plugins {
 }
 
 dependencies {
-    api(libs.hibernate)
-    api(libs.hibernate.hikari)
-    api(libs.jakarta.transactions)
-    runtimeOnly(libs.mariadb)
+    compileOnlyApi(libs.hibernate)
+    compileOnlyApi(libs.hibernate.hikari)
+    compileOnlyApi(libs.jakarta.transactions)
 
-    api(project(":augmented-common:augmented-base:augmented-base-core"))
+    compileOnlyApi(project(":augmented-common:augmented-base:augmented-base-core"))
 }

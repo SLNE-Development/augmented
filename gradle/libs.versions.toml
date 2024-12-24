@@ -21,7 +21,6 @@ jakarta-transactions = "2.0.1"
 adventure-api = "4.17.0"
 adventure-gson = "4.17.0"
 adventure-logger = "4.17.0"
-adventure-platform-bukkit = "4.3.4"
 configurate-hocon = "4.0.0"
 configurate-kotlin = "4.0.0"
 mariadb = "3.5.0"
@@ -56,7 +55,6 @@ jakarta-transactions = { module = "jakarta.transaction:jakarta.transaction-api",
 adventure-api = { module = "net.kyori:adventure-api", version.ref = "adventure-api" }
 adventure-gson = { module = "net.kyori:adventure-text-serializer-gson", version.ref = "adventure-gson" }
 adventure-logger = { module = "net.kyori:adventure-text-logger-slf4j", version.ref = "adventure-logger" }
-adventure-platform-bukkit = { module = "net.kyori:adventure-platform-bukkit", version.ref = "adventure-platform-bukkit" }
 configurate-hocon = { module = "org.spongepowered:configurate-hocon", version.ref = "configurate-hocon" }
 configurate-kotlin = { module = "org.spongepowered:configurate-extra-kotlin", version.ref = "configurate-kotlin" }
 mariadb = { module = "org.mariadb.jdbc:mariadb-java-client", version.ref = "mariadb" }

@@ -5,10 +5,20 @@ plugins {
 }
 
 tasks.withType<ShadowJar> {
-    archiveClassifier.set("shadow")
-    archiveFileName.set("${project.name}-shadow.jar")
-
+    archiveClassifier.set("")
     mergeServiceFiles()
+
+    exclude("kotlin/**")
+    val group = "dev.slne.augmented"
+    val relocations = mapOf(
+        "com.github.shynixn.mccoroutine" to "$group.libs.mccoroutine",
+        "org.intellij" to "$group.libs.intellij",
+        "org.jetbrains" to "$group.libs.jetbrains"
+    )
+
+    relocations.forEach { (from, to) ->
+        relocate(from, to)
+    }
 
     isZip64 = true
 }

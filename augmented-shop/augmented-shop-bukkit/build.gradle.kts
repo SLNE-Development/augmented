@@ -1,6 +1,6 @@
 plugins {
     `common-conventions`
-    `shadow-plugin-conventions`
+    `shadow-conventions`
     `bukkit-conventions`
     `bukkit-server-conventions`
 }
@@ -8,7 +8,6 @@ plugins {
 dependencies {
     api(project(":augmented-shop:augmented-shop-core"))
     compileOnlyApi(project(":augmented-common:augmented-database:augmented-database-bukkit"))
-    compileOnlyApi(project(":augmented-common:augmented-gui"))
     compileOnlyApi(libs.packetuxui)
 }
 
