@@ -25,6 +25,16 @@ paper {
             required = true
             joinClasspath = true
         }
+        register("packetuxui-bukkit") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = true
+            joinClasspath = true
+        }
+        register("packetevents") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = true
+            joinClasspath = true
+        }
     }
 }
 
@@ -39,5 +49,6 @@ tasks.runServer {
 
     downloadPlugins {
         modrinth("commandapi", "9.6.0")
+        modrinth("packetevents", "2.7.0")
     }
 }

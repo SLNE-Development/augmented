@@ -10,6 +10,7 @@ repositories {
 dependencies {
     implementation(libs.kotlin.jvm)
     implementation(libs.shadow.jar)
+    implementation(libs.repo.auth)
 
     implementation(libs.run.paper)
     implementation(libs.run.velocity)

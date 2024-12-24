@@ -2,6 +2,7 @@ package dev.slne.augmented.shop.api
 
 import dev.slne.augmented.common.base.core.block.BlockPosition
 import net.kyori.adventure.key.Key
+import net.kyori.adventure.text.Component
 import java.util.*
 
 interface Shop {
@@ -34,6 +35,8 @@ interface Shop {
 
     suspend fun save(): Shop
     suspend fun delete(): Shop
+
+    fun getShopOwnerDisplayName(): Component
 
     companion object {
         val SHOP_KEY = Key.key("augmented", "shop")

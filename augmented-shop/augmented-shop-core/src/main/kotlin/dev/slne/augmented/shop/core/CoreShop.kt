@@ -6,6 +6,8 @@ import dev.slne.augmented.common.database.core.models.converter.UuidConverter
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.api.shopManager
 import jakarta.persistence.*
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.hibernate.annotations.JdbcTypeCode
 import java.sql.Types
 import java.util.*
@@ -96,6 +98,12 @@ class CoreShop() : Shop {
 
     override suspend fun save() = shopManager.saveShop(this)
     override suspend fun delete() = shopManager.deleteShop(this)
+
+    override fun getShopOwnerDisplayName() =
+        shopOwner?.let { shopInstance.getPlayerDisplayName(it) } ?: Component.text(
+            "ERROR",
+            NamedTextColor.RED
+        )
 
     override fun toString(): String {
         return "CoreShop(id=$id, material=$material, shopKey=$shopKey, shopOwner=$shopOwner, permittedUsers=$permittedUsers, server=$server, world=$world, location=$location, sellPrice=$sellPrice, buyPrice=$buyPrice, buyLimit=$buyLimit, sellLimit=$sellLimit, sellPaused=$sellPaused, buyPaused=$buyPaused, stockAmount=$stockAmount)"

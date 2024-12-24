@@ -4,6 +4,8 @@ plugins {
 
     kotlin("jvm")
     kotlin("kapt")
+    
+    id("org.hibernate.build.maven-repo-auth")
 }
 
 group = "dev.slne"
@@ -15,6 +17,7 @@ repositories {
     maven("https://repo.codemc.org/repository/maven-public/")
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
     maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
+    maven("https://repo.slne.dev/repository/maven-snapshots/") { name = "maven-snapshots" }
 }
 
 val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")
