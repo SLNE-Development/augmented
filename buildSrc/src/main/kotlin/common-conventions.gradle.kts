@@ -4,7 +4,8 @@ plugins {
 
     kotlin("jvm")
     kotlin("kapt")
-    
+    kotlin("plugin.serialization")
+
     id("org.hibernate.build.maven-repo-auth")
 }
 

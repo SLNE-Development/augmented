@@ -20,6 +20,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/augmented-cabin" />
+            <option value="$PROJECT_DIR$/augmented-cabin/augmented-cabin-api" />
+            <option value="$PROJECT_DIR$/augmented-cabin/augmented-cabin-extensions" />
+            <option value="$PROJECT_DIR$/augmented-cabin/augmented-cabin-extensions/augmented-cabin-extension-yml" />
+            <option value="$PROJECT_DIR$/augmented-cabin/augmented-cabin-plugins" />
+            <option value="$PROJECT_DIR$/augmented-cabin/augmented-cabin-plugins/augmented-cabin-plugin-bukkit" />
             <option value="$PROJECT_DIR$/augmented-common" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-base" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-bukkit" />

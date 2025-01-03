@@ -14,8 +14,7 @@ dependencies {
     api(libs.mccoroutine.folia)
     api(libs.mccoroutine.folia.core)
 
-    paperLibrary(libs.configurate.hocon)
-    paperLibrary(libs.configurate.kotlin)
+    paperLibrary(libs.kaml)
     paperLibrary(libs.caffeine)
     paperLibrary(libs.caffeine.coroutines)
     paperLibrary(libs.fastutil)

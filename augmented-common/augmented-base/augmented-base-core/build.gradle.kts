@@ -7,8 +7,7 @@ plugins {
 }
 
 dependencies {
-    compileOnlyApi(libs.configurate.hocon)
-    compileOnlyApi(libs.configurate.kotlin)
+    compileOnlyApi(libs.kaml)
     compileOnlyApi(libs.caffeine)
     compileOnlyApi(libs.caffeine.coroutines)
     compileOnlyApi(libs.fastutil)

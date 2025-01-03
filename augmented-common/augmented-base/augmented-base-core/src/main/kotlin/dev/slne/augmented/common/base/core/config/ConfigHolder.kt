@@ -1,8 +1,10 @@
 package dev.slne.augmented.common.base.core.config
 
-import org.spongepowered.configurate.CommentedConfigurationNode
-import org.spongepowered.configurate.hocon.HoconConfigurationLoader
-import org.spongepowered.configurate.kotlin.objectMapperFactory
+import com.charleskorn.kaml.Yaml
+import com.charleskorn.kaml.decodeFromStream
+import com.charleskorn.kaml.encodeToStream
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.nio.file.Path
 import kotlin.reflect.KClass
 
@@ -12,21 +14,9 @@ abstract class ConfigHolder<C>(
     private val fileName: String
 ) {
 
-    private val loader = HoconConfigurationLoader.builder()
-        .defaultOptions { options ->
-            options.serializers { builder ->
-                builder.registerAnnotatedObjects(
-                    objectMapperFactory()
-                )
-            }
-        }
-        .path(path.resolve(fileName))
-        .build()
-
     var config: C? = null
         private set
 
-    private var commentedNode: CommentedConfigurationNode? = null
 
     init {
         if (!path.toFile().exists()) {
@@ -40,27 +30,27 @@ abstract class ConfigHolder<C>(
         loadConfig()
     }
 
-    protected abstract fun setDefaultConfig(commentedConfigurationNode: CommentedConfigurationNode)
+    protected abstract fun setDefaultConfig()
 
     private fun saveDefaultConfig() {
-        commentedNode = loader.createNode()
-        setDefaultConfig(commentedNode!!)
-        loader.save(commentedNode)
+        setDefaultConfig()
+        saveConfig()
     }
 
     fun reloadConfig() {
         loadConfig()
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private fun loadConfig() {
-        commentedNode = loader.load()
-        config = (commentedNode?.get(clazz.java)
-            ?: throw IllegalStateException(
-                "${
-                    path.resolve(fileName).toAbsolutePath()
-                } is either empty or not found."
-            )) as C?
+    fun loadConfig() {
+        FileInputStream(path.resolve(fileName).toFile()).use { inputStream ->
+            config = Yaml.default.decodeFromStream<C>(inputStream)
+        }
+    }
+
+    fun saveConfig() {
+        FileOutputStream(path.resolve(fileName).toFile()).use { outputStream ->
+            Yaml.default.encodeToStream(config, outputStream)
+        }
     }
 
 }

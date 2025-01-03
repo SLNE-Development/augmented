@@ -27,8 +27,17 @@ val projects: List<Pair<String, String>> = listOf(
     "augmented-shop:augmented-shop-core" to "AugmentedShopCore",
     "augmented-shop:augmented-shop-bukkit" to "AugmentedShopBukkit",
     // endregion
+
+    // region Cabin
+    "augmented-cabin:augmented-cabin-api" to "AugmentedCabinApi",
+    "augmented-cabin:augmented-cabin-plugins:augmented-cabin-plugin-bukkit" to "AugmentedCabinPluginBukkit",
+
+    // region Cabin Extensions
+    "augmented-cabin:augmented-cabin-extensions:augmented-cabin-extension-yml" to "AugmentedCabinExtensionYml",
+    // endregion
+    // endregion
 )
 
-projects.forEach { (path, name) ->
+projects.forEach { (path, _) ->
     include(path)
 }
