@@ -3,27 +3,28 @@ package dev.slne.augmented.common.base.core.config
 import com.charleskorn.kaml.Yaml
 import com.charleskorn.kaml.decodeFromStream
 import com.charleskorn.kaml.encodeToStream
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.serializer
 import java.nio.file.Path
+import kotlin.io.path.*
 import kotlin.reflect.KClass
 
-abstract class ConfigHolder<C>(
-    private val clazz: KClass<*>,
-    private val path: Path,
-    private val fileName: String
+@OptIn(InternalSerializationApi::class)
+abstract class ConfigHolder<C : Any>(
+    private val clazz: KClass<C>,
+    configFolder: Path,
+    fileName: String
 ) {
+    val configPath: Path = configFolder.resolve(fileName)
 
     var config: C? = null
         private set
 
-
     init {
-        if (!path.toFile().exists()) {
-            path.toFile().mkdirs()
-        }
+        configFolder.createDirectories()
 
-        if (!path.resolve(fileName).toFile().exists()) {
+        if (!configPath.exists()) {
+            configPath.createFile()
             saveDefaultConfig()
         }
 
@@ -42,15 +43,15 @@ abstract class ConfigHolder<C>(
     }
 
     fun loadConfig() {
-        FileInputStream(path.resolve(fileName).toFile()).use { inputStream ->
-            config = Yaml.default.decodeFromStream<C>(inputStream)
+        configPath.inputStream().use {
+            Yaml.default.decodeFromStream(clazz.serializer(), it)
         }
     }
 
     fun saveConfig() {
-        FileOutputStream(path.resolve(fileName).toFile()).use { outputStream ->
-            Yaml.default.encodeToStream(config, outputStream)
+        val config = config ?: error("Config is not set yet")
+        configPath.outputStream().use { outputStream ->
+            Yaml.default.encodeToStream(clazz.serializer(), config, outputStream)
         }
     }
-
 }
