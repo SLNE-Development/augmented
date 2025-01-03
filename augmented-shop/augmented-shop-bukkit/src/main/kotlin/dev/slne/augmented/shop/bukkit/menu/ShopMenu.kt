@@ -1,10 +1,10 @@
 package dev.slne.augmented.shop.bukkit.menu
 
 import com.github.shynixn.mccoroutine.folia.scope
-import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.common.base.core.extensions.int2ObjectMapOf
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.bukkit.extensions.getMaterial
+import dev.slne.augmented.shop.bukkit.plugin
 import io.github.retrooper.packetevents.util.SpigotConversionUtil
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
 import net.craftoriya.packetuxui.menu.button.Button

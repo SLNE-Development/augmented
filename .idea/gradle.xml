@@ -30,9 +30,6 @@
             <option value="$PROJECT_DIR$/augmented-common/augmented-base" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-bukkit" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-core" />
-            <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-plugins" />
-            <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-plugins/augmented-base-plugin-bukkit" />
-            <option value="$PROJECT_DIR$/augmented-common/augmented-base/augmented-base-plugins/augmented-base-plugin-velocity" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-database" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-database/augmented-database-bukkit" />
             <option value="$PROJECT_DIR$/augmented-common/augmented-database/augmented-database-core" />

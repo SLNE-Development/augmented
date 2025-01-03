@@ -8,5 +8,5 @@ dependencies {
     compileOnlyApi(libs.hibernate.hikari)
     compileOnlyApi(libs.jakarta.transactions)
 
-    compileOnlyApi(project(":augmented-common:augmented-base:augmented-base-core"))
+    api(project(":augmented-common:augmented-base:augmented-base-core"))
 }

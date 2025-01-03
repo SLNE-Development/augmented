@@ -2,12 +2,13 @@ package dev.slne.augmented.cabin.extensions.balance
 
 import dev.slne.augmented.cabin.api.balance.Balance
 import dev.slne.augmented.cabin.api.currency.Currency
+import dev.slne.augmented.common.base.core.serializers.UuidKSerializer
 import kotlinx.serialization.Serializable
 import java.util.*
 
 @Serializable
 data class YmlBalances(
-    val balances: Map<UUID, List<YmlBalance>>
+    val balances: Map<@Serializable(with = UuidKSerializer::class) UUID, List<YmlBalance>>
 ) {
     fun getBalanceForUser(user: UUID, currency: Currency): Balance =
         balances[user]?.firstOrNull { it.currency == currency.name }

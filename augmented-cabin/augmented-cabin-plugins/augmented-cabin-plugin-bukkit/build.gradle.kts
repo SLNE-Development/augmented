@@ -1,8 +1,13 @@
 plugins {
     `common-conventions`
     `shadow-conventions`
+    `bukkit-conventions`
 }
 
 dependencies {
-    compileOnlyApi(project(":augmented-cabin:augmented-cabin-api"))
+    api(project(":augmented-cabin:augmented-cabin-api"))
+}
+
+paper {
+    main = "dev.slne.augmented.cabin.bukkit.CabinBukkitPlugin"
 }

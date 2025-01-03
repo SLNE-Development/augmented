@@ -12,45 +12,58 @@ import kotlin.reflect.KClass
 @OptIn(InternalSerializationApi::class)
 abstract class ConfigHolder<C : Any>(
     private val clazz: KClass<C>,
-    configFolder: Path,
-    fileName: String
+    private val path: Path,
 ) {
-    val configPath: Path = configFolder.resolve(fileName)
 
-    var config: C? = null
-        private set
+    constructor(
+        clazz: KClass<C>,
+        configFolder: Path,
+        fileName: String,
+    ) : this(clazz, configFolder.resolve(fileName))
+
+    abstract val defaultConfig: C
+
+    private lateinit var _config: C
+    val config: C
+        get() {
+            if (!this::_config.isInitialized) {
+                error("Config value of config $path is not set yet")
+            }
+
+            return _config
+        }
 
     init {
-        configFolder.createDirectories()
+        initConfig()
+    }
 
-        if (!configPath.exists()) {
-            configPath.createFile()
-            saveDefaultConfig()
+    private fun initConfig() {
+        path.parent.createDirectories()
+
+        if (!path.exists()) {
+            path.createFile()
+            saveConfig()
         }
 
         loadConfig()
     }
 
-    protected abstract fun setDefaultConfig()
-
-    private fun saveDefaultConfig() {
-        setDefaultConfig()
-        saveConfig()
-    }
-
-    fun reloadConfig() {
-        loadConfig()
+    fun setDefaultConfig() {
+        _config = defaultConfig
     }
 
     fun loadConfig() {
-        configPath.inputStream().use {
-            Yaml.default.decodeFromStream(clazz.serializer(), it)
+        path.inputStream().use {
+            _config = Yaml.default.decodeFromStream(clazz.serializer(), it)
         }
     }
 
     fun saveConfig() {
-        val config = config ?: error("Config is not set yet")
-        configPath.outputStream().use { outputStream ->
+        if (!this::_config.isInitialized) {
+            error("Config value of config $path is not set yet")
+        }
+
+        path.outputStream().use { outputStream ->
             Yaml.default.encodeToStream(clazz.serializer(), config, outputStream)
         }
     }

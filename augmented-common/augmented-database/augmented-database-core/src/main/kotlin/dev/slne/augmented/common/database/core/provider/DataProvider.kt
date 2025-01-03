@@ -5,6 +5,7 @@ import java.nio.file.Path
 interface DataProvider {
 
     fun getDataDirectory(): Path
+
 }
 
 object DataProviderHolder {

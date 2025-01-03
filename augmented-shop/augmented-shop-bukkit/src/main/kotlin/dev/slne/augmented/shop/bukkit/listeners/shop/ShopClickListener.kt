@@ -16,13 +16,13 @@ object ShopClickListener : Listener {
     suspend fun PlayerInteractEvent.onPlayerInteract() {
         val clickedBlock = clickedBlock ?: return
         val shop = clickedBlock.getShop() ?: return
-
-        isCancelled = true
-
+        
         when (action) {
             Action.RIGHT_CLICK_BLOCK -> handleShopOpen(shop, player)
             else -> return
         }
+
+        isCancelled = true
     }
 
     private suspend fun handleShopOpen(shop: Shop, player: Player) {

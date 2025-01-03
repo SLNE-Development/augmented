@@ -7,7 +7,7 @@ import kotlinx.serialization.encoding.Encoder
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
 
-class ComponentSerializer : KSerializer<Component> {
+class ComponentKSerializer : KSerializer<Component> {
     override val descriptor = String.serializer().descriptor
 
     override fun serialize(encoder: Encoder, value: Component) =

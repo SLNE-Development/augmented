@@ -1,11 +1,13 @@
 package dev.slne.augmented.shop.bukkit.listeners.shop
 
 import com.github.shynixn.mccoroutine.folia.entityDispatcher
+import com.github.shynixn.mccoroutine.folia.launch
 import dev.slne.augmented.common.base.bukkit.extensions.toPosition
-import dev.slne.augmented.common.base.bukkit.plugin.plugin
+import dev.slne.augmented.shop.api.shopManager
 import dev.slne.augmented.shop.bukkit.extensions.CoreShop
 import dev.slne.augmented.shop.bukkit.extensions.isShopItem
-import kotlinx.coroutines.withContext
+import dev.slne.augmented.shop.bukkit.plugin
+import dev.slne.augmented.shop.core.CoreShopManager
 import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -17,8 +19,15 @@ import org.bukkit.event.block.BlockPlaceEvent
 object ShopPlaceListener : Listener {
 
     @EventHandler
-    suspend fun BlockPlaceEvent.onPlace() {
+    fun BlockPlaceEvent.onPlace() {
         if (!itemInHand.isShopItem()) return
+        val shopManager = shopManager as CoreShopManager
+
+        if (shopManager.isLocationLocked(block.location.world.uid, block.location.toPosition())) {
+            player.sendMessage("locked place")
+            isCancelled = true
+            return
+        }
 
         val shop = CoreShop(
             Material.CHEST,
@@ -26,9 +35,11 @@ object ShopPlaceListener : Listener {
             "test",
             block.location.world!!,
             block.location.toPosition()
-        ).add()
+        )
 
-        withContext(plugin.entityDispatcher(player)) {
+        plugin.launch(plugin.entityDispatcher(player)) {
+            shop.save()
+
             player.playSound(
                 Sound.sound().type(org.bukkit.Sound.ENTITY_PLAYER_LEVELUP).build(),
                 Sound.Emitter.self()

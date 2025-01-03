@@ -1,12 +1,9 @@
 package dev.slne.augmented.cabin.api.config
 
-import com.charleskorn.kaml.Yaml
-import com.charleskorn.kaml.decodeFromStream
-import com.charleskorn.kaml.encodeToStream
+import dev.slne.augmented.cabin.api.internalCabinInstance
+import dev.slne.augmented.common.base.core.config.ConfigHolder
 import kotlinx.serialization.Serializable
 import org.jetbrains.annotations.ApiStatus.Internal
-import java.io.FileInputStream
-import java.io.FileOutputStream
 
 @Internal
 @Serializable
@@ -14,23 +11,18 @@ data class CabinConfig(
     val extensions: CabinExtensionConfig
 )
 
-val cabinConfig: CabinConfig by lazy { loadConfig() }
+object CabinConfigHolder : ConfigHolder<CabinConfig>(
+    clazz = CabinConfig::class,
+    configFolder = internalCabinInstance.dataPath,
+    fileName = "config.yml"
+) {
+    override val defaultConfig = CabinConfig(
+        extensions = CabinExtensionConfig(
+            enabledExtension = "enter-extension-name"
+        )
+    )
+}
 
-private fun loadConfig(): CabinConfig {
-    FileInputStream("data/config.yml").use { inputStream ->
-        if (inputStream.available() == 0) {
-            FileOutputStream("data/config.yml").use { outputStream ->
-                val newConfig = CabinConfig(CabinExtensionConfig("enter-extension-name"))
-
-                Yaml.default.encodeToStream(
-                    newConfig,
-                    outputStream
-                )
-
-                return newConfig
-            }
-        }
-        
-        return Yaml.default.decodeFromStream(inputStream)
-    }
+val cabinConfig by lazy {
+    CabinConfigHolder.config
 }

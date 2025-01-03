@@ -93,9 +93,6 @@ class CoreShop() : Shop {
     @Column(name = "stock_amount")
     override var stockAmount: Int? = null
 
-    override fun add() = shopManager.addShop(this)
-    override fun remove() = shopManager.removeShop(this)
-
     override suspend fun save() = shopManager.saveShop(this)
     override suspend fun delete() = shopManager.deleteShop(this)
 

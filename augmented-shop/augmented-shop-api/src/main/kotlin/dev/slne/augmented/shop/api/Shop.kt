@@ -9,7 +9,7 @@ interface Shop {
 
     var id: Long?
 
-    var shopKey: UUID?
+    val shopKey: UUID?
     var shopOwner: UUID?
     var material: String?
 
@@ -30,11 +30,8 @@ interface Shop {
 
     var stockAmount: Int?
 
-    fun add(): Shop
-    fun remove(): Shop
-
-    suspend fun save(): Shop
-    suspend fun delete(): Shop
+    suspend fun save(): Boolean
+    suspend fun delete(): Boolean
 
     fun getShopOwnerDisplayName(): Component
 

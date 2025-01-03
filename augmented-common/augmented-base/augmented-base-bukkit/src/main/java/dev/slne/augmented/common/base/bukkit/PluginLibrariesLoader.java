@@ -1,4 +1,4 @@
-package dev.slne.augmented.common.base.plugin.bukkit;
+package dev.slne.augmented.common.base.bukkit;
 
 import com.google.gson.Gson;
 import io.papermc.paper.plugin.loader.PluginClasspathBuilder;
@@ -15,6 +15,7 @@ import org.eclipse.aether.graph.Dependency;
 import org.eclipse.aether.repository.RemoteRepository;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings({"UnstableApiUsage", "ClassEscapesDefinedScope"})
 public class PluginLibrariesLoader implements PluginLoader {
 
   @Override
@@ -28,6 +29,8 @@ public class PluginLibrariesLoader implements PluginLoader {
 
   public PluginLibraries load() {
     try (var in = getClass().getResourceAsStream("/paper-libraries.json")) {
+      assert in != null;
+      
       return new Gson().fromJson(new InputStreamReader(in, StandardCharsets.UTF_8),
           PluginLibraries.class);
     } catch (IOException e) {

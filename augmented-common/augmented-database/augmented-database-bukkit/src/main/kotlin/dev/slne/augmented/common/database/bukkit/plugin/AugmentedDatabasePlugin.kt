@@ -1,14 +1,10 @@
 package dev.slne.augmented.common.database.bukkit.plugin
 
-import dev.slne.augmented.common.base.bukkit.plugin.AugmentedPlugin
+import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.augmented.common.database.bukkit.provider.AugmentedBukkitDataProvider
 import dev.slne.augmented.common.database.core.provider.DataProviderHolder
-import org.bukkit.plugin.java.JavaPlugin
 
-val databasePlugin: AugmentedDatabasePlugin
-    get() = JavaPlugin.getPlugin(AugmentedDatabasePlugin::class.java)
-
-abstract class AugmentedDatabasePlugin : AugmentedPlugin() {
+abstract class AugmentedDatabasePlugin : SuspendingJavaPlugin() {
 
     override suspend fun onLoadAsync() {
         super.onLoadAsync()

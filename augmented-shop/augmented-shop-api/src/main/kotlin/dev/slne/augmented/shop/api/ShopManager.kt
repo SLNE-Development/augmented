@@ -15,8 +15,8 @@ interface ShopManager {
     fun addShop(shop: Shop): Shop
     fun removeShop(shop: Shop): Shop
 
-    suspend fun saveShop(shop: Shop): Shop
-    suspend fun deleteShop(shop: Shop): Shop
+    suspend fun saveShop(shop: Shop): Boolean
+    suspend fun deleteShop(shop: Shop): Boolean
 
     companion object {
         val instance = requiredService<ShopManager>()

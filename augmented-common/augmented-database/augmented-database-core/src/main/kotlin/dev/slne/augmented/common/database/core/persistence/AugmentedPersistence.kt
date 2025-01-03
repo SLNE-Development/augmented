@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.hibernate.Session
 import org.hibernate.SessionFactory
+import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder
 import org.hibernate.cfg.Configuration
 import kotlin.reflect.KClass
@@ -21,54 +22,45 @@ object AugmentedPersistence {
     }
 
     fun configureHibernate(): SessionFactory {
-        val config = DatabaseConfigHolder.config!!
-        val hikari = config.hikari
+        val config = DatabaseConfigHolder.config
 
-        val username = config.username
-        val password = config.password
-        val hostname = config.hostname
-        val port = config.port
-        val database = config.database
-        val showSql = config.showSql
-        val formatSql = config.formatSql
-        val useSqlComments = config.useSqlComments
+        val (hostname, port, database, username, password, showSql, formatSql, useSqlComments, hikari) = config
+        val (minimumIdle, maximumPoolSize, idleTimeout, connectionTimeout, maxLifetime, driverClassName) = hikari
 
-        val minimumIdle = hikari.minimumIdle
-        val maximumPoolSize = hikari.maximumPoolSize
-        val maxLifetime = hikari.maxLifetime
-        val idleTimeout = hikari.idleTimeout
-        val connectionTimeout = hikari.connectionTimeout
-        val dataSourceClassName = hikari.driverClassName
+        println("ClassLoader: ${this::class.java.classLoader} | ${this::class.java.classLoader.hashCode()}")
 
-        val configuration = Configuration()
-        configuration.setProperty("hibernate.connection.driver_class", dataSourceClassName)
-        configuration.setProperty(
-            "hibernate.connection.url",
-            "jdbc:mariadb://$hostname:$port/$database"
-        )
-        configuration.setProperty("hibernate.connection.username", username)
-        configuration.setProperty("hibernate.connection.password", password)
-        configuration.setProperty("hibernate.hbm2ddl.auto", "none")
-        configuration.setProperty(
-            "hibernate.transaction.jta.platform",
-            "org.hibernate.service.jta.platform.internal.NoJtaPlatform"
-        )
+        val registry =
+            BootstrapServiceRegistryBuilder().applyClassLoader(this::class.java.classLoader).build()
+        val configuration = Configuration(registry).apply {
+            setProperty("hibernate.connection.driver_class", driverClassName)
+            setProperty(
+                "hibernate.connection.url",
+                "jdbc:mariadb://$hostname:$port/$database"
+            )
+            setProperty("hibernate.connection.username", username)
+            setProperty("hibernate.connection.password", password)
+            setProperty("hibernate.hbm2ddl.auto", "none")
+            setProperty(
+                "hibernate.transaction.jta.platform",
+                "org.hibernate.service.jta.platform.internal.NoJtaPlatform"
+            )
 
-        configuration.setProperty("hibernate.show_sql", showSql)
-        configuration.setProperty("hibernate.format_sql", formatSql)
-        configuration.setProperty("hibernate.use_sql_comments", useSqlComments)
+            setProperty("hibernate.show_sql", showSql)
+            setProperty("hibernate.format_sql", formatSql)
+            setProperty("hibernate.use_sql_comments", useSqlComments)
 
-        configuration.setProperty("hibernate.hikari.minimumIdle", minimumIdle)
-        configuration.setProperty("hibernate.hikari.maximumPoolSize", maximumPoolSize)
-        configuration.setProperty("hibernate.hikari.idleTimeout", "$idleTimeout")
-        configuration.setProperty("hibernate.hikari.connectionTimeout", "$connectionTimeout")
-        configuration.setProperty("hibernate.hikari.maxLifetime", "$maxLifetime")
+            setProperty("hibernate.hikari.minimumIdle", minimumIdle)
+            setProperty("hibernate.hikari.maximumPoolSize", maximumPoolSize)
+            setProperty("hibernate.hikari.idleTimeout", "$idleTimeout")
+            setProperty("hibernate.hikari.connectionTimeout", "$connectionTimeout")
+            setProperty("hibernate.hikari.maxLifetime", "$maxLifetime")
 
-        annotatedClasses.forEach {
-            configuration.addAnnotatedClass(it.java)
+            annotatedClasses.forEach {
+                addAnnotatedClass(it.java)
+            }
         }
 
-        val serviceRegistry = StandardServiceRegistryBuilder()
+        val serviceRegistry = StandardServiceRegistryBuilder(registry)
             .applySettings(configuration.properties)
             .build()
 

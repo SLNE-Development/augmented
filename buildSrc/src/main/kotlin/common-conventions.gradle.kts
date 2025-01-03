@@ -12,6 +12,10 @@ plugins {
 group = "dev.slne"
 version = findProperty("version") as String? ?: "1.0.0-SNAPSHOT"
 
+tasks.withType<AbstractArchiveTask> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 repositories {
     mavenCentral()
 
@@ -19,6 +23,7 @@ repositories {
     maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
     maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
     maven("https://repo.slne.dev/repository/maven-snapshots/") { name = "maven-snapshots" }
+    maven("https://repo.slne.dev/repository/maven-unsafe/") { name = "maven-unsafe" }
 }
 
 val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")

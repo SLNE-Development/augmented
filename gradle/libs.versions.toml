@@ -5,11 +5,11 @@ fastutil = "8.5.15"
 plugin-yml = "0.6.0"
 run-paper = "2.3.1"
 run-velocity = "2.3.1"
-commandapi-bukkit = "9.6.0"
-commandapi-bukkit-kotlin = "9.6.0"
+commandapi-bukkit = "9.7.0"
+commandapi-bukkit-kotlin = "9.7.0"
 commandapi-velocity = "9.6.0-SNAPSHOT"
-commandapi-velocity-kotlin = "9.6.0-SNAPSHOT"
-paper-api = "1.21.1-R0.1-SNAPSHOT"
+commandapi-velocity-kotlin = "9.7.0-SNAPSHOT"
+paper-api = "1.21.4-R0.1-SNAPSHOT"
 paperweight = "1.7.4"
 velocity-api = "3.4.0-SNAPSHOT"
 coroutines = "1.9.0"
@@ -28,6 +28,11 @@ autoservice = "1.1.1"
 packetuxui = "1.0.1-SNAPSHOT"
 repo-auth = "3.0.4"
 kaml = "0.67.0"
+
+# Run server versions
+paper-server = "1.21.4"
+commandapi-server = "9.7.0"
+packetevents-server = "2.7.0"
 
 [libraries]
 kotlin-jvm = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-jvm" }
@@ -61,4 +66,4 @@ caffeine-coroutines = { module = "dev.hsbrysk:caffeine-coroutines", version.ref 
 autoservice = { module = "com.google.auto.service:auto-service", version.ref = "autoservice" }
 packetuxui = { module = "net.craftoriya:packetuxui-bukkit", version.ref = "packetuxui" }
 repo-auth = { module = "org.hibernate.build.maven-repo-auth:org.hibernate.build.maven-repo-auth.gradle.plugin", version.ref = "repo-auth" }
-kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
+kaml = { module = "com.charleskorn.kaml:kaml-jvm", version.ref = "kaml" }

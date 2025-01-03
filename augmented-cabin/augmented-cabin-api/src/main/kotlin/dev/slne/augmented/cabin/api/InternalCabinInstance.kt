@@ -1,15 +1,17 @@
 package dev.slne.augmented.cabin.api
 
 import dev.slne.augmented.cabin.api.config.cabinConfig
-import dev.slne.augmented.cabin.api.extension.CabinExtension
+import dev.slne.augmented.cabin.api.extension.Cabin
 import dev.slne.augmented.cabin.api.extension.CabinExtensionManager
 import dev.slne.augmented.cabin.api.extension.extensionManager
 import java.nio.file.Path
+import javax.annotation.OverridingMethodsMustInvokeSuper
 
 abstract class InternalCabinInstance {
 
-    private var _activeCabin: CabinExtension? = null
-    val activeCabin: CabinExtension
+    private var loaded: Boolean = false
+    private var _activeCabin: Cabin? = null
+    val activeCabin: Cabin
         get() = _activeCabin ?: error("No active Cabin extension")
 
     abstract val dataPath: Path
@@ -18,8 +20,9 @@ abstract class InternalCabinInstance {
     abstract fun logError(message: String)
     abstract fun shutdownCabinPlugin()
 
-    suspend fun onLoad() {
-        CabinExtensionManager.loadExtensions()
+    @OverridingMethodsMustInvokeSuper
+    open suspend fun onLoad(classLoader: ClassLoader) {
+        CabinExtensionManager.loadExtensions(classLoader)
 
         if (CabinExtensionManager.extensions.isEmpty()) {
             logWarn("No extensions found, shutting down Cabin as it cannot operate without extensions")
@@ -33,7 +36,9 @@ abstract class InternalCabinInstance {
 
         extensionManager.extensions.find { it.name == enabledExtension }?.let {
             _activeCabin = it
-            it.onEnable()
+            it.onLoad()
+
+            loaded = true
         } ?: run {
             logWarn("Could not find extension with id $enabledExtension, shutting down Cabin as it cannot operate without extensions")
 
@@ -42,11 +47,21 @@ abstract class InternalCabinInstance {
         }
     }
 
-    suspend fun onEnable() {
+    @OverridingMethodsMustInvokeSuper
+    open suspend fun onEnable() {
+        if (!loaded) {
+            return
+        }
+
         _activeCabin?.onEnable()
     }
 
-    suspend fun onDisable() {
+    @OverridingMethodsMustInvokeSuper
+    open suspend fun onDisable() {
+        if (!loaded) {
+            return
+        }
+
         _activeCabin?.onDisable()
     }
 

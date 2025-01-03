@@ -1,78 +1,76 @@
 package dev.slne.augmented.cabin.api.extension
 
+import com.charleskorn.kaml.Yaml
+import com.charleskorn.kaml.decodeFromStream
 import dev.slne.augmented.cabin.api.internalCabinInstance
 import dev.slne.augmented.common.base.core.extensions.freeze
 import dev.slne.augmented.common.base.core.extensions.mutableObjectSetOf
-import dev.slne.augmented.common.base.core.extensions.objectListOf
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.io.File
+import java.nio.file.FileVisitResult
 import java.util.jar.JarFile
-import kotlin.io.path.exists
+import java.util.jar.JarInputStream
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.createDirectories
+import kotlin.io.path.extension
+import kotlin.io.path.visitFileTree
+import kotlin.reflect.KClass
 
 object CabinExtensionManager {
 
     private val loadMutex = Mutex()
-    private val _extensions = mutableObjectSetOf<CabinExtension>()
+    private val _extensions = mutableObjectSetOf<Cabin>()
     val extensions = _extensions.freeze()
 
     @Suppress("UNCHECKED_CAST")
-    operator fun <T : CabinExtension> get(clazz: Class<T>): T? =
+    operator fun <T : Cabin> get(clazz: KClass<T>): T? =
         extensions.firstOrNull { clazz.isInstance(it) } as T?
 
-    suspend fun loadExtensions() = loadMutex.withLock {
+    @OptIn(ExperimentalPathApi::class)
+    suspend fun loadExtensions(classLoader: ClassLoader) = loadMutex.withLock {
         _extensions.clear()
         val extensionPath = internalCabinInstance.dataPath.resolve("extensions")
 
-        if (!extensionPath.exists()) {
-            extensionPath.toFile().mkdirs()
-        }
+        extensionPath.createDirectories()
+        extensionPath.visitFileTree {
+            onVisitFile { path, _ ->
+                if (path.extension == "jar") {
+                    loadExtension(path.toFile(), classLoader)
+                }
 
-        extensionPath.toFile().listFiles()?.forEach { file ->
-            if (file.extension == "jar") {
-                loadExtension(file)
+                FileVisitResult.CONTINUE
             }
         }
     }
 
-    private fun loadExtension(file: File) {
+    private fun loadExtension(file: File, classLoader: ClassLoader) {
         val jarFile = JarFile(file)
-        val filesHavingCabinAnnotation = objectListOf<File>()
+        val cabinClassLoader = CabinClassLoader(classLoader)
 
-        jarFile.entries().asSequence().forEach { entry ->
-            if (entry.name.endsWith(".class")) {
-                val className = entry.name.removeSuffix(".class").replace("/", ".")
-                val clazz = Class.forName(className)
+        cabinClassLoader.addURL(file.toURI().toURL())
 
-                if (clazz.isAnnotationPresent(Cabin::class.java)) {
-                    filesHavingCabinAnnotation.add(file)
-                }
+        val entry = jarFile.getJarEntry("cabin-extension.yml")
+            ?: error("No cabin-extension.yml found in $file")
+
+        JarInputStream(jarFile.getInputStream(entry)).use { stream ->
+            val config = Yaml.default.decodeFromStream<CabinYmlFile>(stream)
+            val mainClass = config.mainClass
+
+            val clazz = Class.forName(mainClass, true, cabinClassLoader)
+
+            if (!Cabin::class.java.isAssignableFrom(clazz)) {
+                error("Class $clazz does not extend Cabin")
             }
+
+            val emptyConstructor =
+                clazz.getDeclaredConstructor() ?: error("No empty constructor found in $clazz")
+
+            val extension = emptyConstructor.newInstance() as Cabin
+            _extensions.add(extension)
+
+            extension.getDataPath().toFile().mkdirs()
         }
-
-        if (filesHavingCabinAnnotation.isEmpty()) {
-            error("No classes with @Cabin annotation found in $file")
-        }
-
-        if (filesHavingCabinAnnotation.size > 1) {
-            error("Multiple classes with @Cabin annotation found in $file")
-        }
-
-        val clazz = Class.forName(
-            filesHavingCabinAnnotation.first().name.removeSuffix(".class").replace("/", ".")
-        )
-
-        if (!CabinExtension::class.java.isAssignableFrom(clazz)) {
-            error("Class $clazz does not extend CabinExtension")
-        }
-
-        val emptyConstructor =
-            clazz.getDeclaredConstructor() ?: error("No empty constructor found in $clazz")
-
-        val extension = emptyConstructor.newInstance() as CabinExtension
-        _extensions.add(extension)
-
-        extension.getDataPath().toFile().mkdirs()
     }
 
 }

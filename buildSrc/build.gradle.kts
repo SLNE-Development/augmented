@@ -8,6 +8,8 @@ repositories {
 }
 
 dependencies {
+    implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+    
     implementation(libs.kotlin.jvm)
     implementation(libs.kotlin.serialization)
     implementation(libs.shadow.jar)

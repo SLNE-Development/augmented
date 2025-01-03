@@ -6,9 +6,9 @@ import dev.slne.augmented.common.base.bukkit.extensions.toLocation
 import dev.slne.augmented.common.base.bukkit.item.buildItem
 import dev.slne.augmented.common.base.bukkit.item.displayName
 import dev.slne.augmented.common.base.bukkit.item.persistentData
-import dev.slne.augmented.common.base.bukkit.plugin.plugin
 import dev.slne.augmented.common.base.core.block.BlockPosition
 import dev.slne.augmented.shop.api.Shop
+import dev.slne.augmented.shop.bukkit.plugin
 import dev.slne.augmented.shop.core.CoreShop
 import kotlinx.coroutines.withContext
 import net.kyori.adventure.text.Component
