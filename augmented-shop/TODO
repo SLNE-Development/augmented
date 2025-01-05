@@ -1,2 +1,3 @@
 - FAWE Extension bei verschieben
 - CoreProtect Extension bei rollback
+- Fix lock on shop break/place which is still not working perfectly if the operation is handled in the same tick I think?

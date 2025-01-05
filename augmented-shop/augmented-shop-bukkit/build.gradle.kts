@@ -1,3 +1,5 @@
+import net.minecrell.pluginyml.paper.PaperPluginDescription
+
 plugins {
     `common-conventions`
     `shadow-conventions`
@@ -7,7 +9,7 @@ plugins {
 dependencies {
     api(project(":augmented-shop:augmented-shop-core"))
     api(project(":augmented-common:augmented-database:augmented-database-bukkit"))
-    
+
     compileOnlyApi(libs.packetuxui)
 }
 
@@ -16,8 +18,9 @@ paper {
 
     serverDependencies {
         register("packetuxui-bukkit") {
-            load = net.minecrell.pluginyml.paper.PaperPluginDescription.RelativeLoadOrder.BEFORE
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
+            joinClasspath = true
         }
     }
 }
