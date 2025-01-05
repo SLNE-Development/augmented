@@ -26,9 +26,7 @@ object AugmentedPersistence {
 
         val (hostname, port, database, username, password, showSql, formatSql, useSqlComments, hikari) = config
         val (minimumIdle, maximumPoolSize, idleTimeout, connectionTimeout, maxLifetime, driverClassName) = hikari
-
-        println("ClassLoader: ${this::class.java.classLoader} | ${this::class.java.classLoader.hashCode()}")
-
+        
         val registry =
             BootstrapServiceRegistryBuilder().applyClassLoader(this::class.java.classLoader).build()
         val configuration = Configuration(registry).apply {
