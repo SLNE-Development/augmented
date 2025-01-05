@@ -12,8 +12,8 @@ interface ShopManager {
 
     suspend fun fetchShops(): @Unmodifiable ObjectSet<Shop>
 
-    fun addShop(shop: Shop): Shop
-    fun removeShop(shop: Shop): Shop
+    fun addShop(shop: Shop): Boolean
+    fun removeShop(shop: Shop): Boolean
 
     suspend fun saveShop(shop: Shop): Boolean
     suspend fun deleteShop(shop: Shop): Boolean

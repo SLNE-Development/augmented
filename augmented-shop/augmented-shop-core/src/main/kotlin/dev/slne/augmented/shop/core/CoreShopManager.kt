@@ -24,38 +24,18 @@ class CoreShopManager : ShopManager, Services.Fallback {
     fun isLocationLocked(world: UUID, location: BlockPosition) =
         locationLocks.contains(world to location)
 
-    suspend fun withLocationLock(shop: Shop, block: suspend () -> Unit): Boolean {
-        val pair = shop.world!! to shop.location!!
-
-        if (!locationLocks.add(pair)) {
-            return false
-        }
-
-        block()
-        locationLocks.remove(pair)
-
-        return true
+    fun withLocationLock(
+        location: Pair<UUID, BlockPosition>,
+        block: (Boolean, () -> Unit) -> Unit
+    ) {
+        block(!locationLocks.add(location)) { locationLocks.remove(location) }
     }
 
-    override fun addShop(shop: Shop): Shop {
-        _shops.add(shop)
+    override fun addShop(shop: Shop) = _shops.add(shop)
+    override fun removeShop(shop: Shop) = _shops.remove(shop)
 
-        return shop
-    }
-
-    override fun removeShop(shop: Shop): Shop {
-        _shops.remove(shop)
-
-        return shop
-    }
-
-    override suspend fun saveShop(shop: Shop) = withLocationLock(shop) {
-        addShop(ShopService.saveShop(shop))
-    }
-
-    override suspend fun deleteShop(shop: Shop) = withLocationLock(shop) {
-        removeShop(ShopService.deleteShop(shop))
-    }
+    override suspend fun saveShop(shop: Shop) = addShop(ShopService.saveShop(shop))
+    override suspend fun deleteShop(shop: Shop) = removeShop(ShopService.deleteShop(shop))
 
     override suspend fun fetchShops(): ObjectSet<Shop> {
         isFetched = false

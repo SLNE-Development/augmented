@@ -30,6 +30,9 @@ interface Shop {
 
     var stockAmount: Int?
 
+    fun add(): Boolean
+    fun remove(): Boolean
+
     suspend fun save(): Boolean
     suspend fun delete(): Boolean
 
