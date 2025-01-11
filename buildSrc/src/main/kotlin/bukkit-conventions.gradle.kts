@@ -37,7 +37,7 @@ paper {
     apiVersion = "1.21"
     authors = listOf("SLNE Development", "Ammo")
     main = "."
-    
+
     generateLibrariesJson = true
     loader = "dev.slne.augmented.common.base.bukkit.PluginLibrariesLoader"
 
@@ -50,6 +50,10 @@ paper {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
+        register("MCKotlin-Paper") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = true
+        }
     }
 }
 
@@ -57,13 +61,15 @@ tasks.runServer {
     val paperVersion = libs.versions.paper.server.get()
     val commandApiVersion = libs.versions.commandapi.server.get()
     val packetEventsVersion = libs.versions.packetevents.server.get()
+    val mckotlinVersion = libs.versions.mckotlin.server.get()
 
     minecraftVersion(paperVersion)
 
     downloadPlugins {
         modrinth("commandapi", commandApiVersion)
         modrinth("packetevents", packetEventsVersion)
+        modrinth("mckotlin", mckotlinVersion)
 
-        url("https://repo.slne.dev/repository/maven-unsafe/net/craftoriya/packetuxui-bukkit/1.0.1-SNAPSHOT/packetuxui-bukkit-1.0.1-20241224.044819-1-all.jar")
+        url("https://repo.slne.dev/repository/maven-unsafe/dev/slne/packetuxui-bukkit/1.0.1-SNAPSHOT/packetuxui-bukkit-1.0.1-20250111.175514-1-all.jar")
     }
 }

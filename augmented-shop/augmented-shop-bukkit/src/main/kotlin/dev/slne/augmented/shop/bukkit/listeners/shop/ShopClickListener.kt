@@ -3,7 +3,7 @@ package dev.slne.augmented.shop.bukkit.listeners.shop
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.bukkit.extensions.getShop
 import dev.slne.augmented.shop.bukkit.menu.ShopMenu
-import net.craftoriya.packetuxui.bukkit.extensions.toUser
+import dev.slne.packetuxui.bukkit.extensions.toUser
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,7 +16,7 @@ object ShopClickListener : Listener {
     suspend fun PlayerInteractEvent.onPlayerInteract() {
         val clickedBlock = clickedBlock ?: return
         val shop = clickedBlock.getShop() ?: return
-        
+
         when (action) {
             Action.RIGHT_CLICK_BLOCK -> handleShopOpen(shop, player)
             else -> return

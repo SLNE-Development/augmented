@@ -33,6 +33,7 @@ kaml = "0.67.0"
 paper-server = "1.21.4"
 commandapi-server = "9.7.0"
 packetevents-server = "2.7.0"
+mckotlin-server = "Z25PwYNh"
 
 [libraries]
 kotlin-jvm = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-jvm" }
@@ -64,6 +65,6 @@ mariadb = { module = "org.mariadb.jdbc:mariadb-java-client", version.ref = "mari
 caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
 caffeine-coroutines = { module = "dev.hsbrysk:caffeine-coroutines", version.ref = "caffeine-coroutines" }
 autoservice = { module = "com.google.auto.service:auto-service", version.ref = "autoservice" }
-packetuxui = { module = "net.craftoriya:packetuxui-bukkit", version.ref = "packetuxui" }
+packetuxui = { module = "dev.slne:packetuxui-bukkit", version.ref = "packetuxui" }
 repo-auth = { module = "org.hibernate.build.maven-repo-auth:org.hibernate.build.maven-repo-auth.gradle.plugin", version.ref = "repo-auth" }
 kaml = { module = "com.charleskorn.kaml:kaml-jvm", version.ref = "kaml" }

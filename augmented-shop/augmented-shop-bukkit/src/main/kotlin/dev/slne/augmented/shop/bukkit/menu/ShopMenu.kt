@@ -5,13 +5,13 @@ import dev.slne.augmented.common.base.core.extensions.int2ObjectMapOf
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.bukkit.extensions.getMaterial
 import dev.slne.augmented.shop.bukkit.plugin
+import dev.slne.packetuxui.menu.button.Button
+import dev.slne.packetuxui.menu.item.ItemBuilder
+import dev.slne.packetuxui.menu.menu.Menu
+import dev.slne.packetuxui.menu.menu.MenuType
+import dev.slne.packetuxui.menu.utils.position
 import io.github.retrooper.packetevents.util.SpigotConversionUtil
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
-import net.craftoriya.packetuxui.menu.button.Button
-import net.craftoriya.packetuxui.menu.item.ItemBuilder
-import net.craftoriya.packetuxui.menu.menu.Menu
-import net.craftoriya.packetuxui.menu.menu.MenuType
-import net.craftoriya.packetuxui.menu.utils.position
 import net.kyori.adventure.text.Component
 import org.jetbrains.annotations.Unmodifiable
 

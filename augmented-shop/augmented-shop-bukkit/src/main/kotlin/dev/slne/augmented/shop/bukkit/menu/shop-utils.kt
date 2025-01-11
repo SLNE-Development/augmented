@@ -1,8 +1,8 @@
 package dev.slne.augmented.shop.bukkit.menu
 
 import com.github.retrooper.packetevents.protocol.item.type.ItemTypes
-import net.craftoriya.packetuxui.menu.button.Button
-import net.craftoriya.packetuxui.menu.item.ItemBuilder
+import dev.slne.packetuxui.menu.button.Button
+import dev.slne.packetuxui.menu.item.ItemBuilder
 import net.kyori.adventure.text.Component
 
 val paneButton = Button(
