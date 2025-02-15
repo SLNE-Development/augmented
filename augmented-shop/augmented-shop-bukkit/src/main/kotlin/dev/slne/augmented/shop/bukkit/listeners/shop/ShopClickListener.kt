@@ -4,13 +4,14 @@ import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.bukkit.extensions.getShop
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 
 object ShopClickListener : Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     suspend fun PlayerInteractEvent.onPlayerInteract() {
         val clickedBlock = clickedBlock ?: return
         val shop = clickedBlock.getShop() ?: return

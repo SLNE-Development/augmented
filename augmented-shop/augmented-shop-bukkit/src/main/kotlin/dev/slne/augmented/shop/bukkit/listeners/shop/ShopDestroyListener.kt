@@ -26,18 +26,35 @@ import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransactionA
 object ShopDestroyListener : Listener {
 
     @EventHandler
-    fun BlockBreakEvent.onBreak() =
+    fun BlockBreakEvent.onBreak() {
+        val beforeLocked =
+            coreShopManager.isLocationLocked(block.world.uid, block.location.toPosition())
+
+        if (beforeLocked) {
+            player.send {
+                text("Es ist gerade ein Shop an dieser Stelle im Aufbau.") with red()
+            }
+
+            isCancelled = true
+            return
+        }
+
         coreShopManager.withLocationLock(block.world.uid to block.location.toPosition()) { locked, removeLock ->
+            val shop = block.getShop() as CoreShop?
+
             if (locked) {
                 player.send {
-                    text("Es ist gerade ein Shop an dieser Stelle im Aufbau.") with red()
+                    text("Es ist gerade ein Shop an dieser Stelle im Aufb23232332au.") with red()
                 }
 
                 isCancelled = true
                 return
             }
 
-            val shop = block.getShop() as CoreShop? ?: return
+            if (shop == null) {
+                removeLock()
+                return
+            }
 
             plugin.launch {
                 suspendedTransactionAsync(Dispatchers.IO) {
@@ -62,4 +79,5 @@ object ShopDestroyListener : Listener {
                 }
             }
         }
+    }
 }

@@ -7,6 +7,7 @@ import dev.slne.augmented.shop.api.shopManager
 import dev.slne.augmented.shop.bukkit.commands.ShopCommand
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopClickListener
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopDestroyListener
+import dev.slne.augmented.shop.bukkit.listeners.shop.ShopDestroyPreventionListener
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopPlaceListener
 import org.bukkit.event.Event
 import org.bukkit.event.player.PlayerInteractEvent
@@ -34,6 +35,7 @@ class AugmentedShopPlugin : AugmentedDatabasePlugin() {
         val pluginManager = server.pluginManager
         pluginManager.registerEvents(ShopPlaceListener, this)
         pluginManager.registerEvents(ShopDestroyListener, this)
+        pluginManager.registerEvents(ShopDestroyPreventionListener, this)
         pluginManager.registerSuspendingEvents(ShopClickListener, this, eventDispatcher)
     }
 
