@@ -1,5 +1,6 @@
 import net.minecrell.pluginyml.paper.PaperPluginDescription
 import org.gradle.accessors.dm.LibrariesForLibs
+import xyz.jpenilla.runpaper.RunPaperExtension
 
 val libs = the<LibrariesForLibs>()
 
@@ -23,10 +24,12 @@ dependencies {
     paperLibrary(libs.caffeine.coroutines)
     paperLibrary(libs.fastutil)
     paperLibrary(libs.coroutines)
-    paperLibrary(libs.jakarta.transactions)
     paperLibrary(libs.mariadb)
-    paperLibrary(libs.hibernate)
-    paperLibrary(libs.hibernate.hikari)
+    paperLibrary(libs.exposed.core)
+    paperLibrary(libs.exposed.dao)
+    paperLibrary(libs.exposed.jdbc)
+    paperLibrary(libs.hikari)
+    paperLibrary(libs.advkt)
 }
 
 paper {
@@ -57,6 +60,14 @@ paper {
     }
 }
 
+runPaper {
+    folia {
+        pluginsMode = RunPaperExtension.Folia.PluginsMode.INHERIT_ALL
+
+        registerTask()
+    }
+}
+
 tasks.runServer {
     val paperVersion = libs.versions.paper.server.get()
     val commandApiVersion = libs.versions.commandapi.server.get()
@@ -69,7 +80,5 @@ tasks.runServer {
         modrinth("commandapi", commandApiVersion)
         modrinth("packetevents", packetEventsVersion)
         modrinth("mckotlin", mckotlinVersion)
-
-        url("https://repo.slne.dev/repository/maven-unsafe/dev/slne/packetuxui-bukkit/1.0.1-SNAPSHOT/packetuxui-bukkit-1.0.1-20250111.175514-1-all.jar")
     }
 }

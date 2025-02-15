@@ -42,7 +42,7 @@ val ShopAdminListBrokenCommand = subcommand("list-broken") {
 
         player.sendMessage("Broken Shops:")
         brokenShops.forEach { (shop, reason) ->
-            player.sendMessage("Shop: ${shop.id} Reason: $reason")
+            player.sendMessage("Shop: ${shop.shopKey} Reason: $reason")
         }
 
         if (fix) {

@@ -11,9 +11,6 @@ data class DatabaseConfig(
     val database: String,
     val username: String,
     val password: String,
-    val showSql: Boolean,
-    val formatSql: Boolean,
-    val useSqlComments: Boolean,
     val hikari: DatabaseHikariConfig
 ) {
     companion object {
@@ -23,9 +20,6 @@ data class DatabaseConfig(
             database = "augmented",
             username = "root",
             password = "",
-            showSql = false,
-            formatSql = false,
-            useSqlComments = false,
             hikari = DatabaseHikariConfig.default()
         )
 

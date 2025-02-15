@@ -53,11 +53,25 @@ fun CoreShop(
     world: World,
     location: BlockPosition
 ): CoreShop {
-    return CoreShop(
-        material.key.toString(),
-        shopOwner,
-        server,
-        world.uid,
-        location,
-    )
+    val shopId = UUID.randomUUID() // Generate a new shop id
+
+    return CoreShop.new {
+        this.material = material.name
+        this.shopKey = shopId
+        this.shopOwner = shopOwner
+
+        this.server = server
+        this.world = world.uid
+        this.location = location
+
+        this.sellPrice = 0.0
+        this.buyPrice = 0.0
+        this.buyLimit = 0
+        this.sellLimit = 0
+
+        this.sellPaused = false
+        this.buyPaused = false
+
+        this.stockAmount = 0
+    }
 }

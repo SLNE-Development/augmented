@@ -1,18 +1,12 @@
 package dev.slne.augmented.shop.core.service
 
 import dev.slne.augmented.shop.api.Shop
-import dev.slne.augmented.shop.core.repository.ShopRepository
+import dev.slne.augmented.shop.core.CoreShop
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransactionAsync
 
 object ShopService {
 
-    suspend fun saveShop(shop: Shop) =
-        withContext(Dispatchers.IO) { ShopRepository.saveShop(shop) }
-
-    suspend fun deleteShop(shop: Shop) =
-        withContext(Dispatchers.IO) { ShopRepository.deleteShop(shop) }
-
     suspend fun findAllShops(): List<Shop> =
-        withContext(Dispatchers.IO) { ShopRepository.findAllShops() }
+        suspendedTransactionAsync(Dispatchers.IO) { CoreShop.all().toList() }.await()
 }

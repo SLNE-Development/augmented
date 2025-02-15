@@ -16,9 +16,9 @@ fun ItemStack.isShopItem(): Boolean {
 }
 
 fun Block.isShop(): Boolean {
-    return shopManager.shops.any { it.location?.equalsLocation(this.location.toBlockLocation()) == true }
+    return shopManager.shops.any { it.location.equalsLocation(this.location.toBlockLocation()) }
 }
 
 fun Block.getShop(): Shop? {
-    return shopManager.shops.firstOrNull { it.location?.equalsLocation(this.location.toBlockLocation()) == true }
+    return shopManager.shops.firstOrNull { it.location.equalsLocation(this.location.toBlockLocation()) }
 }

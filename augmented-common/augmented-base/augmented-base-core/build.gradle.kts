@@ -16,4 +16,5 @@ dependencies {
     compileOnlyApi(libs.adventure.gson)
     compileOnlyApi(libs.adventure.logger)
     compileOnlyApi(libs.autoservice)
+    compileOnlyApi(libs.advkt)
 }

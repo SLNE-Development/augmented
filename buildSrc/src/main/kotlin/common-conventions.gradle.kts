@@ -5,8 +5,6 @@ plugins {
     kotlin("jvm")
     kotlin("kapt")
     kotlin("plugin.serialization")
-
-    id("org.hibernate.build.maven-repo-auth")
 }
 
 group = "dev.slne"
@@ -18,12 +16,7 @@ tasks.withType<AbstractArchiveTask> {
 
 repositories {
     mavenCentral()
-
-    maven("https://repo.codemc.org/repository/maven-public/")
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
-    maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
-    maven("https://repo.slne.dev/repository/maven-snapshots/") { name = "maven-snapshots" }
-    maven("https://repo.slne.dev/repository/maven-unsafe/") { name = "maven-unsafe" }
+    maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
 }
 
 val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")

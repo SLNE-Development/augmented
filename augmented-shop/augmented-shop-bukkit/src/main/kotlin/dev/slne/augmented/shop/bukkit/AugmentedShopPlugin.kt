@@ -3,13 +3,11 @@ package dev.slne.augmented.shop.bukkit
 import com.github.shynixn.mccoroutine.folia.entityDispatcher
 import com.github.shynixn.mccoroutine.folia.registerSuspendingEvents
 import dev.slne.augmented.common.database.bukkit.plugin.AugmentedDatabasePlugin
-import dev.slne.augmented.common.database.core.persistence.AugmentedPersistence
 import dev.slne.augmented.shop.api.shopManager
 import dev.slne.augmented.shop.bukkit.commands.ShopCommand
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopClickListener
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopDestroyListener
 import dev.slne.augmented.shop.bukkit.listeners.shop.ShopPlaceListener
-import dev.slne.augmented.shop.core.CoreShop
 import org.bukkit.event.Event
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.plugin.java.JavaPlugin
@@ -22,8 +20,6 @@ class AugmentedShopPlugin : AugmentedDatabasePlugin() {
 
     override suspend fun onLoadAsync() {
         super.onLoadAsync()
-
-        AugmentedPersistence.addAnnotatedClass(CoreShop::class)
 
         shopManager.fetchShops()
     }
