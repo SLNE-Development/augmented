@@ -33,18 +33,21 @@ fun Shop.getBukkitLocation(): Location? {
 
 fun Shop.getBukkitWorld(): World? = world?.let { Bukkit.getWorld(it) }
 
-suspend fun Shop.Companion.giveItem(player: Player, amount: Int = 1) =
-    withContext(plugin.entityDispatcher(player)) {
-        val item = buildItem(Material.CHEST, amount) {
-            displayName(Component.text("Shop", NamedTextColor.GOLD))
+suspend fun Shop.Companion.giveItem(
+    player: Player,
+    material: Material = Material.CHEST,
+    amount: Int = 1
+) = withContext(plugin.entityDispatcher(player)) {
+    val item = buildItem(material, amount) {
+        displayName(Component.text("Shop", NamedTextColor.GOLD))
 
-            persistentData {
-                setBoolean(SHOP_KEY, true)
-            }
+        persistentData {
+            setBoolean(SHOP_KEY, true)
         }
-
-        player.inventory.addItem(item)
     }
+
+    player.inventory.addItem(item)
+}
 
 fun CoreShop(
     material: Material,
