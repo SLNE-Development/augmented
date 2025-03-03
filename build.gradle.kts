@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.gradle.kotlin.dsl.withType
 
 plugins {
     id("com.gradleup.shadow") version libs.versions.shadow.jar.get()
@@ -17,7 +16,7 @@ allprojects {
         val relocations = mapOf(
             "com.github.shynixn.mccoroutine" to "$group.libs.mccoroutine",
             "org.intellij" to "$group.libs.intellij",
-            "org.jetbrains" to "$group.libs.jetbrains"
+            "org.jetbrains.annotations" to "$group.libs.jetbrains.annotations"
         )
 
         relocations.forEach { (from, to) ->
