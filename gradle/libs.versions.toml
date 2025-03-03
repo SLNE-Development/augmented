@@ -1,5 +1,5 @@
 [versions]
-kotlin-jvm = "2.0.21"
+kotlin-jvm = "2.1.10"
 shadow-jar = "9.0.0-beta8"
 fastutil = "8.5.15"
 plugin-yml = "0.6.0"
