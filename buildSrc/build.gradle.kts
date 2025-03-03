@@ -12,7 +12,7 @@ dependencies {
     
     implementation(libs.kotlin.jvm)
     implementation(libs.kotlin.serialization)
-    implementation(libs.shadow.jar)
+//    implementation(libs.shadow.jar)
     implementation(libs.repo.auth)
 
     implementation(libs.run.paper)

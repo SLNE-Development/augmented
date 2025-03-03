@@ -1,6 +1,5 @@
 plugins {
     `common-conventions`
-    `shadow-conventions`
 
     kotlin("jvm")
     kotlin("kapt")

@@ -2,7 +2,7 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     `common-conventions`
-    `shadow-conventions`
+    
     `bukkit-conventions`
 }
 
