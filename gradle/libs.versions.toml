@@ -1,6 +1,6 @@
 [versions]
 kotlin-jvm = "2.0.21"
-shadow-jar = "8.3.5"
+shadow-jar = "9.0.0-beta8"
 fastutil = "8.5.15"
 plugin-yml = "0.6.0"
 run-paper = "2.3.1"
@@ -22,7 +22,7 @@ mariadb = "3.5.0"
 caffeine = "3.1.8"
 caffeine-coroutines = "1.2.0"
 autoservice = "1.1.1"
-packetuxui = "1.0.1-SNAPSHOT"
+surf-gui = "2.0.1-SNAPSHOT"
 repo-auth = "3.0.4"
 kaml = "0.67.0"
 exposed = "0.59.0"
@@ -33,7 +33,6 @@ advkt = "1.0.0-SNAPSHOT"
 paper-server = "1.21.4"
 commandapi-server = "9.7.0"
 packetevents-server = "2.7.0"
-mckotlin-server = "Z25PwYNh"
 
 [libraries]
 kotlin-jvm = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-jvm" }
@@ -62,7 +61,7 @@ mariadb = { module = "org.mariadb.jdbc:mariadb-java-client", version.ref = "mari
 caffeine = { module = "com.github.ben-manes.caffeine:caffeine", version.ref = "caffeine" }
 caffeine-coroutines = { module = "dev.hsbrysk:caffeine-coroutines", version.ref = "caffeine-coroutines" }
 autoservice = { module = "com.google.auto.service:auto-service", version.ref = "autoservice" }
-packetuxui = { module = "dev.slne:packetuxui-bukkit", version.ref = "packetuxui" }
+surf-gui = { module = "dev.slne.surf:surf-gui-bukkit", version.ref = "surf-gui" }
 repo-auth = { module = "org.hibernate.build.maven-repo-auth:org.hibernate.build.maven-repo-auth.gradle.plugin", version.ref = "repo-auth" }
 kaml = { module = "com.charleskorn.kaml:kaml-jvm", version.ref = "kaml" }
 exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }

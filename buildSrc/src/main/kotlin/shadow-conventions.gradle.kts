@@ -17,6 +17,6 @@ tasks.withType<ShadowJar> {
     )
 
     relocations.forEach { (from, to) ->
-//        relocate(from, to)
+        relocate(from, to)
     }
 }

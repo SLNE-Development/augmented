@@ -20,7 +20,10 @@ import org.bukkit.World
 import org.bukkit.entity.Player
 import java.util.*
 
-fun Shop.getMaterial(): Material? = material?.let { Material.matchMaterial(it) }
+fun Shop.getMaterial(): Material =
+    Material.getMaterial(material)
+        ?: error("Cannot construct bukkit material from material string $material")
+
 fun Shop.setMaterial(material: Material) {
     this.material = material.name
 }

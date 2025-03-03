@@ -19,6 +19,7 @@ dependencies {
     api(libs.mccoroutine.folia)
     api(libs.mccoroutine.folia.core)
 
+    paperLibrary(libs.kotlin.jvm)
     paperLibrary(libs.kaml)
     paperLibrary(libs.caffeine)
     paperLibrary(libs.caffeine.coroutines)
@@ -53,10 +54,6 @@ paper {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
-        register("MCKotlin-Paper") {
-            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
-            required = true
-        }
     }
 }
 
@@ -72,13 +69,11 @@ tasks.runServer {
     val paperVersion = libs.versions.paper.server.get()
     val commandApiVersion = libs.versions.commandapi.server.get()
     val packetEventsVersion = libs.versions.packetevents.server.get()
-    val mckotlinVersion = libs.versions.mckotlin.server.get()
 
     minecraftVersion(paperVersion)
 
     downloadPlugins {
         modrinth("commandapi", commandApiVersion)
         modrinth("packetevents", packetEventsVersion)
-        modrinth("mckotlin", mckotlinVersion)
     }
 }

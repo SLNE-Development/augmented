@@ -2,6 +2,8 @@ package dev.slne.augmented.shop.bukkit.listeners.shop
 
 import dev.slne.augmented.shop.api.Shop
 import dev.slne.augmented.shop.bukkit.extensions.getShop
+import dev.slne.augmented.shop.bukkit.menu.ShopMenu
+import dev.slne.surf.gui.bukkit.extensions.toUser
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -26,6 +28,6 @@ object ShopClickListener : Listener {
 
     private suspend fun handleShopOpen(shop: Shop, player: Player) {
         player.sendMessage("Shop opened")
-//        ShopMenu(shop).open(player.toUser())
+        ShopMenu(shop).open(player.toUser())
     }
 }

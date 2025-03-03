@@ -1,3 +1,5 @@
+import org.gradle.accessors.dm.LibrariesForLibs
+
 plugins {
     `java-library`
     `maven-publish`
@@ -19,9 +21,9 @@ repositories {
     maven("https://repo.slne.dev/repository/maven-public/") { name = "maven-public" }
 }
 
-val libs: VersionCatalog = the<VersionCatalogsExtension>().named("libs")
+val libs = the<LibrariesForLibs>()
 dependencies {
-    kapt(libs.findLibrary("autoservice").orElseThrow())
+    kapt(libs.autoservice)
 }
 
 java {
