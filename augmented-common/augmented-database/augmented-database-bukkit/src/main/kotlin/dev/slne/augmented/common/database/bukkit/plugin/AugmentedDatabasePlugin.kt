@@ -2,6 +2,7 @@ package dev.slne.augmented.common.database.bukkit.plugin
 
 import com.github.shynixn.mccoroutine.folia.SuspendingJavaPlugin
 import dev.slne.augmented.common.database.bukkit.provider.AugmentedBukkitDataProvider
+import dev.slne.augmented.common.database.core.persistence.AugmentedPersistence
 import dev.slne.augmented.common.database.core.provider.DataProviderHolder
 
 abstract class AugmentedDatabasePlugin : SuspendingJavaPlugin() {
@@ -10,6 +11,7 @@ abstract class AugmentedDatabasePlugin : SuspendingJavaPlugin() {
         super.onLoadAsync()
 
         DataProviderHolder.dataProvider = AugmentedBukkitDataProvider
+        AugmentedPersistence.connectDatabase()
     }
 
     override suspend fun onEnableAsync() {

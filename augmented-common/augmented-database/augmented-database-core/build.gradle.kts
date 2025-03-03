@@ -4,9 +4,10 @@ plugins {
 }
 
 dependencies {
-    compileOnlyApi(libs.hibernate)
-    compileOnlyApi(libs.hibernate.hikari)
-    compileOnlyApi(libs.jakarta.transactions)
+    compileOnlyApi(libs.exposed.core)
+    compileOnlyApi(libs.exposed.dao)
+    compileOnlyApi(libs.exposed.jdbc)
+    compileOnlyApi(libs.hikari)
 
     api(project(":augmented-common:augmented-base:augmented-base-core"))
 }

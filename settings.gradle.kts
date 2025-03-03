@@ -24,11 +24,11 @@ val projects: List<Pair<String, String>> = listOf(
     // endregion
 
     // region Cabin
-    "augmented-cabin:augmented-cabin-api" to "AugmentedCabinApi",
-    "augmented-cabin:augmented-cabin-plugins:augmented-cabin-plugin-bukkit" to "AugmentedCabinPluginBukkit",
+//    "augmented-cabin:augmented-cabin-api" to "AugmentedCabinApi",
+//    "augmented-cabin:augmented-cabin-plugins:augmented-cabin-plugin-bukkit" to "AugmentedCabinPluginBukkit",
 
     // region Cabin Extensions
-    "augmented-cabin:augmented-cabin-extensions:augmented-cabin-extension-yml" to "AugmentedCabinExtensionYml",
+//    "augmented-cabin:augmented-cabin-extensions:augmented-cabin-extension-yml" to "AugmentedCabinExtensionYml",
     // endregion
     // endregion
 )

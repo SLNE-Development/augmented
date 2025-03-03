@@ -1,5 +1,6 @@
 import net.minecrell.pluginyml.paper.PaperPluginDescription
 import org.gradle.accessors.dm.LibrariesForLibs
+import xyz.jpenilla.runpaper.RunPaperExtension
 
 val libs = the<LibrariesForLibs>()
 
@@ -18,15 +19,18 @@ dependencies {
     api(libs.mccoroutine.folia)
     api(libs.mccoroutine.folia.core)
 
+    paperLibrary(libs.kotlin.jvm)
     paperLibrary(libs.kaml)
     paperLibrary(libs.caffeine)
     paperLibrary(libs.caffeine.coroutines)
     paperLibrary(libs.fastutil)
     paperLibrary(libs.coroutines)
-    paperLibrary(libs.jakarta.transactions)
     paperLibrary(libs.mariadb)
-    paperLibrary(libs.hibernate)
-    paperLibrary(libs.hibernate.hikari)
+    paperLibrary(libs.exposed.core)
+    paperLibrary(libs.exposed.dao)
+    paperLibrary(libs.exposed.jdbc)
+    paperLibrary(libs.hikari)
+    paperLibrary(libs.advkt)
 }
 
 paper {
@@ -50,10 +54,14 @@ paper {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
-        register("MCKotlin-Paper") {
-            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
-            required = true
-        }
+    }
+}
+
+runPaper {
+    folia {
+        pluginsMode = RunPaperExtension.Folia.PluginsMode.INHERIT_ALL
+
+        registerTask()
     }
 }
 
@@ -61,15 +69,11 @@ tasks.runServer {
     val paperVersion = libs.versions.paper.server.get()
     val commandApiVersion = libs.versions.commandapi.server.get()
     val packetEventsVersion = libs.versions.packetevents.server.get()
-    val mckotlinVersion = libs.versions.mckotlin.server.get()
 
     minecraftVersion(paperVersion)
 
     downloadPlugins {
         modrinth("commandapi", commandApiVersion)
         modrinth("packetevents", packetEventsVersion)
-        modrinth("mckotlin", mckotlinVersion)
-
-        url("https://repo.slne.dev/repository/maven-unsafe/dev/slne/packetuxui-bukkit/1.0.1-SNAPSHOT/packetuxui-bukkit-1.0.1-20250111.175514-1-all.jar")
     }
 }
