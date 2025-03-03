@@ -1,6 +1,6 @@
 plugins {
     `common-conventions`
-    
+
 }
 
 dependencies {

@@ -2,7 +2,7 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     `common-conventions`
-    
+
     `bukkit-conventions`
 }
 
@@ -29,8 +29,8 @@ tasks.runServer {
         github(
             "SLNE-Development",
             "surf-gui",
-            "v2.0.1-SNAPSHOT",
-            "surf-gui-bukkit-2.0.1-SNAPSHOT-all.jar"
+            "v2.0.2-SNAPSHOT",
+            "surf-gui-bukkit-2.0.2-SNAPSHOT-all.jar"
         )
     }
 }
