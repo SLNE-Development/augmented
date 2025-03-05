@@ -25,12 +25,12 @@ paper {
 }
 
 tasks.runServer {
-    downloadPlugins {
-        github(
-            "SLNE-Development",
-            "surf-gui",
-            "v2.0.2-SNAPSHOT",
-            "surf-gui-bukkit-2.0.2-SNAPSHOT-all.jar"
-        )
-    }
+//    downloadPlugins {
+//        github(
+//            "SLNE-Development",
+//            "surf-gui",
+//            "v2.0.2-SNAPSHOT",
+//            "surf-gui-bukkit-2.0.2-SNAPSHOT-all.jar"
+//        )
+//    }
 }

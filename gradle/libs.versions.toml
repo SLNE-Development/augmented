@@ -24,10 +24,11 @@ caffeine-coroutines = "1.2.0"
 autoservice = "1.1.1"
 surf-gui = "2.0.2-SNAPSHOT"
 repo-auth = "3.0.4"
-kaml = "0.67.0"
-exposed = "0.59.0"
+kaml = "0.72.0"
+exposed = "0.60.0"
 hikari = "6.2.1"
 advkt = "1.0.0-SNAPSHOT"
+gremlin = "0.0.7"
 
 # Run server versions
 paper-server = "1.21.4"
@@ -70,3 +71,4 @@ exposed-dao = { module = "org.jetbrains.exposed:exposed-dao", version.ref = "exp
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }
 hikari = { module = "com.zaxxer:HikariCP", version.ref = "hikari" }
 advkt = { module = "ink.pmc.advkt:core", version.ref = "advkt" }
+gremlin = { module = "xyz.jpenilla.gremlin-gradle:xyz.jpenilla.gremlin-gradle.gradle.plugin", version.ref = "gremlin" }

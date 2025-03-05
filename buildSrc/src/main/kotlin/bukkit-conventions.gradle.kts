@@ -9,6 +9,7 @@ plugins {
 
     id("net.minecrell.plugin-yml.paper")
     id("xyz.jpenilla.run-paper")
+    id("xyz.jpenilla.gremlin-gradle")
 }
 
 dependencies {
@@ -19,18 +20,76 @@ dependencies {
     api(libs.mccoroutine.folia)
     api(libs.mccoroutine.folia.core)
 
-    paperLibrary(libs.kotlin.stdlib)
-    paperLibrary(libs.kaml)
-    paperLibrary(libs.caffeine)
-    paperLibrary(libs.caffeine.coroutines)
-    paperLibrary(libs.fastutil)
-    paperLibrary(libs.coroutines)
-    paperLibrary(libs.mariadb)
-    paperLibrary(libs.exposed.core)
-    paperLibrary(libs.exposed.dao)
-    paperLibrary(libs.exposed.jdbc)
-    paperLibrary(libs.hikari)
-    paperLibrary(libs.advkt)
+    runtimeDownload(libs.kaml) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.caffeine) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.caffeine.coroutines) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.fastutil) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.mariadb) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.exposed.core) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.exposed.dao) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.exposed.jdbc) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.hikari) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
+    runtimeDownload(libs.advkt) {
+        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+        exclude("org.jetbrains.kotlin", "kotlin-reflect")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
+    }
 }
 
 paper {
@@ -42,8 +101,8 @@ paper {
     authors = listOf("SLNE Development", "Ammo")
     main = "."
 
-    generateLibrariesJson = true
-    loader = "dev.slne.augmented.common.base.bukkit.PluginLibrariesLoader"
+    generateLibrariesJson = false
+    loader = "xyz.jpenilla.gremlin.runtime.platformsupport.DefaultsPaperPluginLoader"
 
     serverDependencies {
         register("CommandAPI") {
@@ -51,6 +110,10 @@ paper {
             required = true
         }
         register("packetevents") {
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+            required = true
+        }
+        register("MCKotlin-Paper") {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
             required = true
         }
@@ -75,5 +138,6 @@ tasks.runServer {
     downloadPlugins {
         modrinth("commandapi", commandApiVersion)
         modrinth("packetevents", packetEventsVersion)
+//        modrinth("mckotlin", "Z25PwYNh")
     }
 }
