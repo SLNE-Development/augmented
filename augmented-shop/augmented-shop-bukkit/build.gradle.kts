@@ -2,7 +2,6 @@ import net.minecrell.pluginyml.paper.PaperPluginDescription
 
 plugins {
     `common-conventions`
-
     `bukkit-conventions`
 }
 

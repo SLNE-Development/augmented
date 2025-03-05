@@ -20,76 +20,41 @@ dependencies {
     api(libs.mccoroutine.folia)
     api(libs.mccoroutine.folia.core)
 
-    runtimeDownload(libs.kaml) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.caffeine) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.caffeine.coroutines) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.fastutil) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.mariadb) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.exposed.core) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.exposed.dao) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.exposed.jdbc) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.hikari) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
-    runtimeDownload(libs.advkt) {
-        exclude("org.jetbrains.kotlin", "kotlin-stdlib")
-        exclude("org.jetbrains.kotlin", "kotlin-reflect")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
-        exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
-        exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
-    }
+    runtimeWithoutKotlin(libs.kaml)
+    runtimeWithoutKotlin(libs.caffeine)
+    runtimeWithoutKotlin(libs.caffeine.coroutines)
+    runtimeWithoutKotlin(libs.fastutil)
+    runtimeWithoutKotlin(libs.mariadb)
+    runtimeWithoutKotlin(libs.exposed.core)
+    runtimeWithoutKotlin(libs.exposed.dao)
+    runtimeWithoutKotlin(libs.exposed.jdbc)
+    runtimeWithoutKotlin(libs.hikari)
+    runtimeWithoutKotlin(libs.advkt)
+}
+
+fun DependencyHandler.runtimeWithoutKotlin(
+    dependencyNotation: ProviderConvertible<*>,
+    dependencyConfiguration: Action<ExternalModuleDependency>? = null
+) = runtimeDownload(dependencyNotation) {
+    dependencyConfiguration?.execute(this)
+    
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+    exclude("org.jetbrains.kotlin", "kotlin-reflect")
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+}
+
+fun DependencyHandler.runtimeWithoutKotlin(
+    dependencyNotation: Provider<*>,
+    dependencyConfiguration: Action<ExternalModuleDependency>? = null
+) = runtimeDownload(dependencyNotation) {
+    dependencyConfiguration?.execute(this)
+
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib")
+    exclude("org.jetbrains.kotlin", "kotlin-reflect")
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-core")
+    exclude("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8")
+    exclude("org.jetbrains.kotlinx", "kotlinx-serialization-core-jvm")
 }
 
 paper {
